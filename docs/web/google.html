@@ -65,8 +65,8 @@
             en_url=encodeURIComponent(en_url).replaceAll("%","@").replaceAll(".","~");
             var input_url=my_input.value.split('/')[0].split('.').length;
             if (input_url>1&&my_input.value.split('/')[0].split('.')[input_url-1].length<4) {
-                if (my_input.value.indexOf('buttonbugs.byethost12.com')==0||0<=my_input.value.split('.')[0]<256) {
-                    window.open("http://"+my_input.value);
+                if (my_input.value.indexOf('buttonbugs.github.io')==0||0<=my_input.value.split('.')[0]<256) {
+                    window.open("https://"+my_input.value);
                 }else{
                     location.href="https://"+my_input.value;
                 }
@@ -82,7 +82,7 @@
             en_url=encodeURIComponent(en_url).replaceAll("%","@").replaceAll(".","~");
             var input_url=my_input.value.split('/')[0].split('.').length;
             if (input_url>1&&my_input.value.split('/')[0].split('.')[input_url-1].length<4) {
-                location.href="http://buttonbugs.byethost12.com/"+dev+"?i=0&url="+en_url;
+                location.href="https://buttonbugs.github.io/"+dev+"?i=0&url="+en_url;
             } else {
                 location.href="?i=0&q="+my_input.value;
             }
