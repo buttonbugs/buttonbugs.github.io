@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" href="buttonbugs.svg" type="image/x-icon" />
+        <link rel="shortcut icon" href="buttonbugs.svg" type="image/x-icon"/>
+        <title>ButtonBugs</title>
+        <style>
+            html,body{
+                padding: 0;
+                margin: 0;
+                border: 0;
+                overflow-x: hidden;
+                scrollbar-width: auto;
+                user-select: none;
+                font-family: sans-serif;
+            }
+            .navigator{
+                position: fixed;
+                top: 0;
+                width: 100%;
+                height: 50px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                font-size: 28px;
+                text-wrap: nowrap;
+                overflow: hidden;
+            }
+            .navigator>div{
+                cursor: pointer;
+            }
+            #navigator_email{
+                display: flex;
+                flex-direction: row;
+                height: 50px;
+                align-items: center;
+                font-size: 14px;
+            }
+            #navigator_email>span:nth-child(2){
+                overflow: hidden;
+                transition-duration: .2s;
+                width: 0px;
+            }
+            #navigator_email:hover>span:nth-child(2){
+                width: 200px;
+            }
+            #croll_tips{
+                position: fixed;
+                display: flex;
+                flex-direction: column;
+                bottom: 2vh;
+                width: 100%;
+                align-items: center;
+                font-size: 2.4vh;
+                transition: 2s;
+                color: #666;
+            }
+            #cube_player_cover{
+                position: fixed;
+                z-index: -99999;
+                overflow: hidden;
+            }
+            #cube_player_cover>div{
+                position: absolute;
+            }
+            #cube_player_cover_lcd{
+                top: 22.0vw;
+                left: 45.25vw;
+                width: 15vw;
+                height: 6vw;
+                overflow: hidden;
+                text-wrap: nowrap;
+                font-size: 1.7vw;
+                font-family: Consolas, monospace, 'Courier New';
+                color: #666;
+                transition-duration:1.2s;
+                transform: rotateX(74deg) rotateY(0deg) rotateZ(21deg);
+            }
+            #title_creativity,#title_design,#title_handcrafts{
+                position: fixed;
+                display: flex;
+                flex-direction: row;
+                text-wrap: nowrap;
+                transition: 1.2s;
+                font-size: 15vh;
+                align-items: flex-end;
+                overflow: hidden;
+            }
+            #title_handcrafts>div{
+                width: 3px;
+                height: 100%;
+                margin: 0 1.8vh;
+                background-color: black;
+            }
+            #title_handcrafts>span{
+                transition-duration: .2s;
+            }
+            #title_handcrafts>span.scale_120{
+                cursor: pointer;
+            }
+            #title_block{
+                transition-duration: .4s;
+                position: fixed;
+                left: 6.7vh;
+                top: 9vh;
+                height: 10vh;
+                background-color: #888;
+            }
+            #title_cube_player{
+                position: fixed;
+                left: 10vh;
+                top: 23vh;
+                height: 7vh;
+                font-size: 6vh;
+                color: #444;
+                overflow: hidden;
+                transition-duration: 1.2s;
+            }
+            #title_cube_player_1{
+                position: fixed;
+                left: 10vh;
+                top: 32vh;
+                width: 40vh;
+                font-size: 2.5vh;
+                color: #888;
+                transition-duration: 1.2s;
+                overflow: hidden;
+            }
+            #title_cube_player_2,#title_cube_player_3{
+                position: fixed;
+                left: 10vh;
+                font-size: 3.2vh;
+                cursor: pointer;
+                color: #666;
+                transition-duration: 1.2s;
+                overflow: hidden;
+                text-wrap: nowrap;
+            }
+            #title_cube_player_2:hover,#title_cube_player_3:hover{
+                font-size: 3.5vh;
+                color: black;
+                transition-duration: .2s;
+            }
+            #title_cube_player_1>span{
+                font-weight: bold;
+            }
+            /* icons */
+            .icon_24{
+                width: 24px;
+                height: 24px;
+            }
+            /* hover effect */
+            .scale_120{
+                transition-duration: .2s;
+                filter: grayscale(1) brightness(0.6) contrast(5);
+            }
+            .scale_120:hover{
+                scale: 120%;
+                filter: grayscale(0) brightness(1.0) contrast(1);
+            }
+            /* screen adaptation */
+            .desktop{
+                display: '';
+            }
+            .mobile{
+                display: none;
+            }
+            @media screen and (max-width: 767px) {
+                .mobile{
+                    display: '';
+                }
+                .desktop{
+                    display: none;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div style="display: none;"><!-- Hidden Items -->
+        </div>
+        <!-- navigator -->
+        <div class="navigator desktop">
+            <img src="buttonbugs.svg" style="width: 36px;margin: 7px;">
+            <span>ButtonBugs</span>
+            <div style="height: 50px;right:0;position: absolute;display: flex;flex-direction: row-reverse;align-items: center;overflow: visible;">
+                <img onclick="window.open('https://www.mymusicsheet.com/ButtonBugs');" style="margin: 7px;" src="object00home/mymusicsheet.svg" class="icon_24 scale_120" alt="MyMusicSheet" title="MyMusicSheet">
+                <img onclick="window.open('https://github.com/buttonbugs/apps');" style="margin: 7px;" src="object00home/github.svg" class="icon_24 scale_120" alt="GitHub" title="GitHub">
+                <img onclick="window.open('object00home/wechat_channel_code.jpg');" style="margin: 7px;" src="data:image/png;base64,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" class="icon_24 scale_120" alt="Wechat Channel" title="Wechat Channel">
+                <div id="navigator_email" title="click to copy">
+                    <img style="margin: 7px;" src="object00home/email.svg" class="icon_24 scale_120" alt="Wechat Channel">
+                    <span>Miller.Chen2006@outlook.com</span>
+                </div>
+            </div>
+        </div>
+        <div id="croll_tips" style="opacity: 0;display: flex;">Please scroll down</div>
+        <!-- initial animation -->
+        <div id="cube_player_cover" style="left: 60vw;top: 18vw;width: 96vw;height: 54vw;opacity: 0;transition-duration:1.2s">
+            <!-- width: 64vw;height: 36vw; -->
+            <img src="object00home/cube_player_cover.png" style="width: 100%;height: 100%;">
+            <div id="cube_player_cover_lcd"></div>
+        </div>
+        <div id="title_creativity" style="left: 8vh;top: 14vh;height: 0;">Creativity &amp;</div>
+        <div id="title_design" style="left: 8vh;top: 34vh;height: 0;">Design</div>
+        <div id="title_handcrafts" style="left: 6.7vh;top: 56vh;height: 5vh;font-size: 4vh;width: 0;">
+            <span>&nbsp;&nbsp;</span>
+            <span class="scale_120" onclick="window.scrollTo(0,1);">Handcrafts</span>
+            <div>&nbsp;</div>
+            <span class="scale_120">Apps</span>
+            <div>&nbsp;</div>
+            <span class="scale_120">Music</span>
+            <span>&nbsp;&nbsp;</span>
+        </div>
+        <div id="title_block" style="width: 0;"></div>
+        <div id="title_cube_player" style="width: 0;">Cube&nbsp;Player</div>
+        <div id="title_cube_player_1" style="height: 0;">The <span>Cube Player</span> is a unique robot designed to solve Rubik's cubes. <br><br>It has the capability to <span>scramble</span>, <span>solve</span>, or be <span>manually controlled</span> using only 2 motors.</div>
+        <div id="title_cube_player_2" style="top: 52vh;width: 0;">See its structure ></div>
+        <div id="title_cube_player_3" style="top: 57vh;width: 0;">View detailed principle ></div>
+        <div style="width: 100%;height: 4000px;"><!-- blank area --></div>
+        d<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>d<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>d<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </body>
+    <script>
+        //const
+        const handcrafts_content=[
+            '<span>&nbsp;&nbsp;</span><span class="scale_120" onclick="window.scrollTo(0,1);">Handcrafts</span><div>&nbsp;</div><span class="scale_120">Apps</span><div>&nbsp;</div><span class="scale_120">Music</span><span>&nbsp;&nbsp;</span>',
+            '<span>&nbsp;&nbsp;</span><span>Handcrafts</span>'
+        ]
+        const cube_player_cover_lcd_content1='>Scramble a cube<br>';
+        const cube_player_cover_lcd_content2='>Solve a cube';
+        const title_cube_player_1_content='The <span>Cube Player</span> is a unique robot designed to solve Rubik\'s cubes. <br><br>It has the capability to <span>scramble</span>, <span>solve</span>, or be <span>manually controlled</span> using only 2 motors.';
+        //variable
+        var cube_player_cover_lcd_blink=[true,true];//blink(true:'█',false:'>'),position
+        var scroll_tip_opacity=0;
+        //functions
+        function math_map(input=0,input_start=0,input_end=1,output_start=0,output_end=1) {
+            return (output_start+(input-input_start)*(output_end-output_start)/(input_end-input_start));
+        }
+        document.getElementById("navigator_email").onclick=(event)=>{
+            try {
+                copy('Miller.Chen2006@outlook.com');
+                event.target.parentElement.children[1].innerHTML=' Email address copied ✔';
+                } catch (error) {
+                try {
+                    navigator.clipboard.writeText('Miller.Chen2006@outlook.com');
+                    event.target.parentElement.children[1].innerHTML=' Email address copied ✔';
+                } catch (error) {
+                    prompt('Please copy the email address below','Miller.Chen2006@outlook.com');
+                }
+            }
+            setTimeout(() => {
+                event.target.parentElement.children[1].innerHTML='Miller.Chen2006@outlook.com';
+            }, 2000);
+        }
+        //initial animation
+        setTimeout(() => {
+            document.getElementById("cube_player_cover").style.opacity='1';
+            setInterval(() => {
+                scroll_tip_opacity=1-scroll_tip_opacity;
+                document.getElementById("croll_tips").style.opacity=scroll_tip_opacity;
+            }, 2000);
+        }, 100);
+        for (let i = 0; i < (cube_player_cover_lcd_content1+cube_player_cover_lcd_content2).length; i++) {
+            setTimeout(() => {
+                document.getElementById("cube_player_cover_lcd").innerHTML=(cube_player_cover_lcd_content1+cube_player_cover_lcd_content2).slice(0,i+1)+'█';
+            }, 50*i+2000);
+        }
+        setTimeout(() => {
+            document.getElementById("cube_player_cover_lcd").innerHTML=(cube_player_cover_lcd_content1+cube_player_cover_lcd_content2);
+            setInterval(() => {
+                document.getElementById("cube_player_cover_lcd").innerHTML=((cube_player_cover_lcd_blink[0]&&cube_player_cover_lcd_blink[1]?'█':'>')+cube_player_cover_lcd_content1.slice(1)+(cube_player_cover_lcd_blink[0]&&!cube_player_cover_lcd_blink[1]?'█':'>')+cube_player_cover_lcd_content2.slice(1));
+                cube_player_cover_lcd_blink[0]=!cube_player_cover_lcd_blink[0];
+            }, 500);
+        }, 50*(cube_player_cover_lcd_content1+cube_player_cover_lcd_content2).length+2400);
+        //scroll event
+        function handleScroll() {
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            var frame = 0;
+            if (scrollTop==0) {
+                //initial animation
+                setTimeout(() => {
+                    document.getElementById("cube_player_cover").style.left='20vw';
+                }, 100);
+                setTimeout(() => {
+                    document.getElementById("title_creativity").style.height='18vh';
+                }, 1000);
+                setTimeout(() => {
+                    document.getElementById("title_design").style.height='18vh';
+                }, 1250);
+                setTimeout(() => {
+                    document.getElementById("title_handcrafts").style.width='54vh';
+                }, 1600);
+                document.getElementById("cube_player_cover").style.transitionDuration='1.2s';
+                document.getElementById("cube_player_cover").style.top='18vw';
+                document.getElementById("title_creativity").style.left='8vh';
+                document.getElementById("title_design").style.left='8vh';
+                document.getElementById("title_handcrafts").innerHTML=handcrafts_content[0];
+                document.getElementById("title_handcrafts").style.left='6.7vh';
+                document.getElementById("title_handcrafts").style.top='56vh';
+                document.getElementById("title_handcrafts").style.height='5vh';
+                document.getElementById("title_handcrafts").style.fontSize='4vh';
+                document.getElementById("title_block").style.width='0';
+                document.getElementById("croll_tips").style.display='flex';
+                document.getElementById("title_cube_player").style.width='0';
+                document.getElementById("title_cube_player").style.transitionDelay='0';
+                document.getElementById("title_cube_player_1").style.height='0';
+                document.getElementById("title_cube_player_1").style.transitionDelay='0';
+                document.getElementById("title_cube_player_2").style.width='0';
+                document.getElementById("title_cube_player_2").style.transitionDelay='0';
+                document.getElementById("title_cube_player_3").style.width='0';
+                document.getElementById("title_cube_player_3").style.transitionDelay='0';
+            }else if(scrollTop<500) {
+                document.getElementById("cube_player_cover").style.transitionDuration='.8s';
+                document.getElementById("cube_player_cover").style.left='16vw';
+                document.getElementById("cube_player_cover").style.top='10vw';
+                document.getElementById("title_creativity").style.height='0';
+                document.getElementById("title_design").style.height='0';
+                document.getElementById("title_handcrafts").innerHTML=handcrafts_content[1];
+                document.getElementById("title_handcrafts").style.left='8vh';
+                document.getElementById("title_handcrafts").style.top='8vh';
+                document.getElementById("title_handcrafts").style.width='60vh';
+                document.getElementById("title_handcrafts").style.height='12vh';
+                document.getElementById("title_handcrafts").style.fontSize='10vh';
+                document.getElementById("title_block").style.width='4vh';
+                document.getElementById("croll_tips").style.display='none';
+                document.getElementById("title_cube_player").style.width='40vh';
+                document.getElementById("title_cube_player").style.transitionDelay='.1s';
+                document.getElementById("title_cube_player_1").style.height='40vh';
+                document.getElementById("title_cube_player_1").style.transitionDelay='.3s';
+                document.getElementById("title_cube_player_2").style.width='40vh';
+                document.getElementById("title_cube_player_2").style.transitionDelay='.8s';
+                document.getElementById("title_cube_player_3").style.width='40vh';
+                document.getElementById("title_cube_player_3").style.transitionDelay='1s';
+                setTimeout(() => {
+                    document.getElementById("title_cube_player").style.transitionDelay='0s';
+                    document.getElementById("title_cube_player_1").style.transitionDelay='0s';
+                    document.getElementById("title_cube_player_2").style.transitionDelay='0s';
+                    document.getElementById("title_cube_player_3").style.transitionDelay='0s';
+                }, 1001);
+            }else if (scrollTop<1400) {
+                document.getElementById("cube_player_cover").style.transitionDuration='.2s';
+                document.getElementById("cube_player_cover").style.left=math_map(scrollTop,500,1400,16,4)+'vw';
+                document.getElementById("cube_player_cover").style.top=math_map(scrollTop,500,1400,10,19)+'vw';
+                document.getElementById("title_creativity").style.height='0';
+                document.getElementById("title_design").style.height='0';
+                document.getElementById("title_handcrafts").innerHTML=handcrafts_content[1];
+                document.getElementById("title_handcrafts").style.left='8vh';
+                document.getElementById("title_handcrafts").style.top='8vh';
+                document.getElementById("title_handcrafts").style.width='60vh';
+                document.getElementById("title_handcrafts").style.height='12vh';
+                document.getElementById("title_handcrafts").style.fontSize='10vh';
+                document.getElementById("title_block").style.width='4vh';
+                document.getElementById("croll_tips").style.display='none';
+                document.getElementById("title_cube_player").style.width='40vh';
+                document.getElementById("title_cube_player").style.transitionDelay='0s';
+                document.getElementById("title_cube_player_1").style.height=math_map(scrollTop,500,1400,40,0)+'vh';
+                document.getElementById("title_cube_player_1").style.transitionDelay='0s';
+                document.getElementById("title_cube_player_2").style.width=math_map(scrollTop,500,1400,40,0)+'vh';
+                document.getElementById("title_cube_player_2").style.transitionDelay='0s';
+                document.getElementById("title_cube_player_3").style.width=math_map(scrollTop,500,1400,40,0)+'vh';
+                document.getElementById("title_cube_player_3").style.transitionDelay='0s';
+            }else if (scrollTop<1800) {
+                document.getElementById("cube_player_cover").style.transitionDuration='.2s';
+                document.getElementById("cube_player_cover").style.left=math_map(scrollTop,1400,1800,4,-2)+'vw';
+                document.getElementById("cube_player_cover").style.top='19vw';
+                document.getElementById("title_creativity").style.height='0';
+                document.getElementById("title_design").style.height='0';
+                document.getElementById("title_handcrafts").innerHTML=handcrafts_content[1];
+                document.getElementById("title_handcrafts").style.left='8vh';
+                document.getElementById("title_handcrafts").style.top='8vh';
+                document.getElementById("title_handcrafts").style.width='60vh';
+                document.getElementById("title_handcrafts").style.height='12vh';
+                document.getElementById("title_handcrafts").style.fontSize='10vh';
+                document.getElementById("title_block").style.width='4vh';
+                document.getElementById("croll_tips").style.display='none';
+                document.getElementById("title_cube_player").style.width='40vh';
+                document.getElementById("title_cube_player").style.transitionDelay='0s';
+                document.getElementById("title_cube_player_1").style.height='0vh';
+                document.getElementById("title_cube_player_1").style.transitionDelay='0s';
+                document.getElementById("title_cube_player_2").style.width='0vh';
+                document.getElementById("title_cube_player_2").style.transitionDelay='0s';
+                document.getElementById("title_cube_player_3").style.width='0vh';
+                document.getElementById("title_cube_player_3").style.transitionDelay='0s';
+            }else if (scrollTop<2200) {
+                document.getElementById("cube_player_cover").style.transitionDuration='.2s';
+                document.getElementById("cube_player_cover").style.left=math_map(scrollTop,1800,2200,-2,-8)+'vw';
+                document.getElementById("cube_player_cover").style.top='19vw';
+                document.getElementById("title_creativity").style.height='0';
+                document.getElementById("title_design").style.height='0';
+                document.getElementById("title_handcrafts").innerHTML=handcrafts_content[1];
+                document.getElementById("title_handcrafts").style.left='8vh';
+                document.getElementById("title_handcrafts").style.top='8vh';
+                document.getElementById("title_handcrafts").style.width='60vh';
+                document.getElementById("title_handcrafts").style.height='12vh';
+                document.getElementById("title_handcrafts").style.fontSize='10vh';
+                document.getElementById("title_block").style.width='4vh';
+                document.getElementById("croll_tips").style.display='none';
+                document.getElementById("title_cube_player").style.width='40vh';
+                document.getElementById("title_cube_player").style.transitionDelay='0s';
+                document.getElementById("title_cube_player_1").style.height='0vh';
+                document.getElementById("title_cube_player_1").style.transitionDelay='0s';
+                document.getElementById("title_cube_player_2").style.width='0vh';
+                document.getElementById("title_cube_player_2").style.transitionDelay='0s';
+                document.getElementById("title_cube_player_3").style.width='0vh';
+                document.getElementById("title_cube_player_3").style.transitionDelay='0s';
+            }
+        }
+        window.addEventListener('scroll', handleScroll);
+        //orientation
+        function handleOrientationChange(event) {
+            if (screen.orientation.angle === 90 || screen.orientation.angle === -90) {} else {
+                screen.orientation.lock('landscape').catch(function(error) {});
+            }
+        }
+        try {
+            if (window.screen.orientation) {
+                window.addEventListener('orientationchange', handleOrientationChange);
+                handleOrientationChange();
+            }
+            handleScroll();
+            history.pushState(null,null,"/");
+        } catch (error) {};
+    </script>
+</html>
