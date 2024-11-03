@@ -5,8 +5,12 @@
         <link rel="icon" href="buttonbugs.svg" type="image/x-icon" />
         <link rel="shortcut icon" href="buttonbugs.svg" type="image/x-icon"/>
         <link rel="alternate" href="object02base64.html" media="landscape">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
         <title>ButtonBugs</title>
         <style>
+            .preload_items{
+                display: none;
+            }
             html,body{
                 padding: 0;
                 margin: 0;
@@ -62,7 +66,7 @@
                 z-index: -99999;
                 overflow: hidden;
             }
-            #cube_player_cover>div{
+            #cube_player_cover>:nth-last-child(n){
                 position: absolute;
             }
             #cube_player_cover_lcd{
@@ -77,6 +81,10 @@
                 color: #666;
                 transition-duration:1.2s;
                 transform: rotateX(74deg) rotateY(0deg) rotateZ(21deg);
+            }
+            #cube_player_cover_canvas{
+                width: 100%;
+                height: 100%;
             }
             #title_creativity,#title_design,#title_handcrafts{
                 position: fixed;
@@ -160,28 +168,16 @@
                 scale: 120%;
                 filter: grayscale(0) brightness(1.0) contrast(1);
             }
-            /* screen adaptation */
-            .desktop{
-                display: '';
-            }
-            .mobile{
-                display: none;
-            }
-            @media screen and (max-width: 767px) {
-                .mobile{
-                    display: '';
-                }
-                .desktop{
-                    display: none;
-                }
-            }
         </style>
     </head>
     <body>
         <div style="display: none;"><!-- Hidden Items -->
+            <div class="perload_items">
+                <img src="object00home/cube_player_cover.png">
+            </div>
         </div>
         <!-- navigator -->
-        <div class="navigator desktop">
+        <div class="navigator">
             <img src="buttonbugs.svg" style="width: 36px;margin: 7px;">
             <span>ButtonBugs</span>
             <div style="height: 50px;right:0;position: absolute;display: flex;flex-direction: row-reverse;align-items: center;overflow: visible;">
@@ -200,6 +196,7 @@
             <!-- width: 64vw;height: 36vw; -->
             <img src="object00home/cube_player_cover.png" style="width: 100%;height: 100%;">
             <div id="cube_player_cover_lcd"></div>
+            <canvas id="cube_player_cover_canvas" width="1151" height="647"></canvas>
         </div>
         <div id="title_creativity" style="left: 8vh;top: 14vh;height: 0;">Creativity &amp;</div>
         <div id="title_design" style="left: 8vh;top: 34vh;height: 0;">Design</div>
@@ -222,6 +219,8 @@
     </body>
     <script>
         //const
+        const canvas_size=[1151,647];
+        const scrolling_node=[0,500,1400,1800,2200];
         const handcrafts_content=[
             '<span>&nbsp;&nbsp;</span><span class="scale_120" onclick="window.scrollTo(0,1);">Handcrafts</span><div>&nbsp;</div><span class="scale_120">Apps</span><div>&nbsp;</div><span class="scale_120">Music</span><span>&nbsp;&nbsp;</span>',
             '<span>&nbsp;&nbsp;</span><span>Handcrafts</span>'
@@ -232,6 +231,9 @@
         //variable
         var cube_player_cover_lcd_blink=[true,true];//blink(true:'█',false:'>'),position
         var scroll_tip_opacity=0;
+        //canvas
+        var ctx_cube_player_cover = document.getElementById("cube_player_cover_canvas").getContext("2d");
+        ctx_cube_player_cover.translate(0.5,0.5);
         //functions
         function math_map(input=0,input_start=0,input_end=1,output_start=0,output_end=1) {
             return (output_start+(input-input_start)*(output_end-output_start)/(input_end-input_start));
@@ -275,6 +277,7 @@
         //scroll event
         function handleScroll() {
             var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            console.log(scrollTop);
             var frame = 0;
             if (scrollTop==0) {
                 //initial animation
@@ -309,7 +312,9 @@
                 document.getElementById("title_cube_player_2").style.transitionDelay='0';
                 document.getElementById("title_cube_player_3").style.width='0';
                 document.getElementById("title_cube_player_3").style.transitionDelay='0';
-            }else if(scrollTop<500) {
+                //canvas rendering
+                ctx_cube_player_cover.clearRect(0,0,canvas_size[0],canvas_size[1]);
+            }else if(scrollTop<scrolling_node[1]) {
                 document.getElementById("cube_player_cover").style.transitionDuration='.8s';
                 document.getElementById("cube_player_cover").style.left='16vw';
                 document.getElementById("cube_player_cover").style.top='10vw';
@@ -337,10 +342,18 @@
                     document.getElementById("title_cube_player_2").style.transitionDelay='0s';
                     document.getElementById("title_cube_player_3").style.transitionDelay='0s';
                 }, 1001);
-            }else if (scrollTop<1400) {
+                //canvas rendering
+                ctx_cube_player_cover.clearRect(0,0,canvas_size[0],canvas_size[1]);
+                ctx_cube_player_cover.beginPath();
+                ctx_cube_player_cover.strokeStyle='rgb(48,107,188)';
+                ctx_cube_player_cover.lineWidth = 4;
+                ctx_cube_player_cover.arc(618, 175, 120, -Math.PI*0.5, Math.PI*math_map(scrollTop,scrolling_node[0],scrolling_node[1],-.5,.5));
+                ctx_cube_player_cover.stroke();
+                ctx_cube_player_cover.closePath();
+            }else if (scrollTop<scrolling_node[2]) {
                 document.getElementById("cube_player_cover").style.transitionDuration='.2s';
-                document.getElementById("cube_player_cover").style.left=math_map(scrollTop,500,1400,16,4)+'vw';
-                document.getElementById("cube_player_cover").style.top=math_map(scrollTop,500,1400,10,19)+'vw';
+                document.getElementById("cube_player_cover").style.left=math_map(scrollTop,scrolling_node[1],scrolling_node[2],16,4)+'vw';
+                document.getElementById("cube_player_cover").style.top=math_map(scrollTop,scrolling_node[1],scrolling_node[2],10,19)+'vw';
                 document.getElementById("title_creativity").style.height='0';
                 document.getElementById("title_design").style.height='0';
                 document.getElementById("title_handcrafts").innerHTML=handcrafts_content[1];
@@ -353,15 +366,23 @@
                 document.getElementById("croll_tips").style.display='none';
                 document.getElementById("title_cube_player").style.width='40vh';
                 document.getElementById("title_cube_player").style.transitionDelay='0s';
-                document.getElementById("title_cube_player_1").style.height=math_map(scrollTop,500,1400,40,0)+'vh';
+                document.getElementById("title_cube_player_1").style.height=math_map(scrollTop,scrolling_node[1],scrolling_node[2],40,0)+'vh';
                 document.getElementById("title_cube_player_1").style.transitionDelay='0s';
-                document.getElementById("title_cube_player_2").style.width=math_map(scrollTop,500,1400,40,0)+'vh';
+                document.getElementById("title_cube_player_2").style.width=math_map(scrollTop,scrolling_node[1],scrolling_node[2],40,0)+'vh';
                 document.getElementById("title_cube_player_2").style.transitionDelay='0s';
-                document.getElementById("title_cube_player_3").style.width=math_map(scrollTop,500,1400,40,0)+'vh';
+                document.getElementById("title_cube_player_3").style.width=math_map(scrollTop,scrolling_node[1],scrolling_node[2],40,0)+'vh';
                 document.getElementById("title_cube_player_3").style.transitionDelay='0s';
+                //canvas rendering
+                ctx_cube_player_cover.clearRect(0,0,canvas_size[0],canvas_size[1]);
+                ctx_cube_player_cover.beginPath();
+                ctx_cube_player_cover.strokeStyle='rgb(48,107,188)';
+                ctx_cube_player_cover.lineWidth = 4;
+                ctx_cube_player_cover.arc(618, 175, 120, Math.PI*math_map(scrollTop,scrolling_node[1],scrolling_node[2],-.5,.5), Math.PI*.5);
+                ctx_cube_player_cover.stroke();
+                ctx_cube_player_cover.closePath();
             }else if (scrollTop<1800) {
                 document.getElementById("cube_player_cover").style.transitionDuration='.2s';
-                document.getElementById("cube_player_cover").style.left=math_map(scrollTop,1400,1800,4,-2)+'vw';
+                document.getElementById("cube_player_cover").style.left=math_map(scrollTop,scrolling_node[2],scrolling_node[3],4,-2)+'vw';
                 document.getElementById("cube_player_cover").style.top='19vw';
                 document.getElementById("title_creativity").style.height='0';
                 document.getElementById("title_design").style.height='0';
@@ -381,9 +402,11 @@
                 document.getElementById("title_cube_player_2").style.transitionDelay='0s';
                 document.getElementById("title_cube_player_3").style.width='0vh';
                 document.getElementById("title_cube_player_3").style.transitionDelay='0s';
-            }else if (scrollTop<2200) {
+                //canvas rendering
+                ctx_cube_player_cover.clearRect(0,0,canvas_size[0],canvas_size[1]);
+            }else if (scrollTop<scrolling_node[4]) {
                 document.getElementById("cube_player_cover").style.transitionDuration='.2s';
-                document.getElementById("cube_player_cover").style.left=math_map(scrollTop,1800,2200,-2,-8)+'vw';
+                document.getElementById("cube_player_cover").style.left=math_map(scrollTop,scrolling_node[3],scrolling_node[4],-2,-8)+'vw';
                 document.getElementById("cube_player_cover").style.top='19vw';
                 document.getElementById("title_creativity").style.height='0';
                 document.getElementById("title_design").style.height='0';
@@ -403,6 +426,8 @@
                 document.getElementById("title_cube_player_2").style.transitionDelay='0s';
                 document.getElementById("title_cube_player_3").style.width='0vh';
                 document.getElementById("title_cube_player_3").style.transitionDelay='0s';
+                //canvas rendering
+                ctx_cube_player_cover.clearRect(0,0,canvas_size[0],canvas_size[1]);
             }
         }
         window.addEventListener('scroll', handleScroll);
