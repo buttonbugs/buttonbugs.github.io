@@ -1,0 +1,1440 @@
+<!--
+    https://blog.51cto.com/u_16175519/6628689
+    https://docs.sheetjs.com/docs/
+
+    Ctrl + Shift + M
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ButtonBugs Account Books</title>
+    <meta charset="UTF-8">
+    <meta name="color-scheme" content="light dark">
+    <link rel="apple-touch-icon-precomposed" href="object06buttonbugs_account_books/others/object06buttonbugs_account_books.png">
+    <link rel="icon" type="image/vnd.microsoft.icon" href="object06buttonbugs_account_books/others/object06buttonbugs_account_books.png">
+    <link rel="apple-touch-icon" href="object06buttonbugs_account_books/others/object06buttonbugs_account_books.png">
+    <style>
+        html,body{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #f3f3f3;
+            color: #000;
+            font-size: 45px;
+            font-family: arial, helvetica, sans-serif;
+            text-wrap: nowrap;
+            overflow: hidden;
+        }
+        div{
+            transition-duration: 0.2s;text-wrap: nowrap;
+        }
+        .have-children-table{
+            display: none;
+        }
+        input{
+            border: none;outline: none;padding: 0;background: transparent;margin: 0;width: 100%;
+            height: 90px;
+            font-size: 50px;
+            text-align: start;
+        }
+        select{
+            font-size: 45px;width: 100%;border: none;outline: none;
+        }
+        .Recents_Groups_sticker{
+            width: 90%;height: 140px;background: #fff;margin: 40px auto;border-radius: 32px;
+        }
+        .Recents_Groups_sticker:hover{
+            width: 85%;background-color: #ffffff88;
+        }
+        .Recents_Groups_sticker_top{
+            width: 100%;height: 20px;
+        }
+        .Recents_Groups_sticker_row{
+            flex-direction: row;margin: 0 20px;
+        }
+        .Recents_Groups_sticker_pic_div{
+            width: 100px;height: 100px;float: left;
+        }
+        .Recents_Groups_sticker_column{
+            margin: 0 30px;float: left;
+        }
+        .Recents_Groups_sticker_name{
+            font-size: 52px;
+        }
+        .Recents_Groups_sticker_money{
+            font-size: 30px;color: #888;
+        }
+        .Recents_Groups_sticker_right{
+            float: right;margin: 25px 20px;color: #888;
+        }
+        .Groups_sticker_split{
+            margin: 0 5%;background: #f0f0f0;color: #444;font-size: 45px;
+        }
+        .Groups_sticker_split span:nth-child(2){
+            float: right;
+        }
+        .Groups_sticker{
+            height: 100px;margin: 28px 5%;flex-direction: row;
+        }
+        .Groups_sticker:hover{
+            background-color: #f3f3f3;
+        }
+        .Groups_sticker_img{
+            margin: 14px;float: left;width: 72px;height: 72px;
+        }
+        .Groups_sticker_text{
+            flex-direction: row;
+        }
+        .Groups_sticker_money{
+            width: 260px;margin: 24px 0;float: right;color: #888;text-align: right;
+        }
+        .Groups_sticker_mid{
+            height: 100px;
+        }
+        .Groups_sticker_name{
+            font-size: 52px;overflow: hidden;height: 69px;
+        }
+        .Groups_sticker_paid{
+            font-size: 24px;color: #888;
+        }
+        .Buttons_on_the_top{
+            width: 100px;height: 100px;top: 50px;position: fixed;
+        }
+        .Buttons_on_the_top .Buttons_on_the_top_menu:nth-child(2){
+            display: none;position: fixed;top: 140px;
+        }
+        .Buttons_on_the_top:hover .Buttons_on_the_top_menu:nth-child(2){
+            display: unset;
+        }
+        .Buttons_on_the_top_menu_choice{
+            background: white;width: auto;border: 20px solid white;box-shadow: 0 0 10px #ddd;
+        }
+        .Buttons_on_the_top_menu_choice:hover{
+            background-color: #eee;border: 20px solid #eee;
+        }
+        .Buttons_on_the_top_menu .Buttons_on_the_top_menu_choice:nth-child(2){
+            border-radius: 25px 25px 0 0;
+        }
+        .Buttons_on_the_top_menu .Buttons_on_the_top_menu_choice:last-child{
+            border-radius: 0 0 25px 25px;
+        }
+        .Buttons_on_the_top_img{
+            margin: 14px;width: 72px;height: 72px;
+        }
+        .Buttons_on_the_top_menu_triangle{
+            width: auto;height: 30px;
+        }
+        .Buttons_on_the_top_menu_triangle div:nth-child(1){
+            border: 30px solid transparent;border-top: 0;border-bottom: 30px solid white;width: 0;height: 0;position: relative;
+        }
+        .Modal_background{
+            width: 100%;height: 100%;background-color: #00000022;position: fixed;top: -100%;left: 0;opacity: 0;transition-duration: 0;
+        }
+        .Modal_pop_ups{
+            width: 100%;height: 1300px;background: white;position: fixed;bottom: -100%;left: 0;border-radius: 64px 64px 0 0;transition-duration: 0.4s;
+        }
+        .Modal_title{
+            width: 100%;height: 150px;font-size: 80px;text-align: center;margin-top: 50px;
+        }
+        .Modal_form{
+            width: 90%;margin: 0 auto;font-size: 45px;overflow: scroll;
+        }
+        .Modal_form>div{
+            margin-top: 32px;font-size: 50px;
+        }
+        .Modal_form input{
+            border-bottom: 2px solid #aaa;
+        }
+        .Modal_form input:focus{
+            border-bottom: 2px solid #3c73fd;
+        }
+        .Modal_form select{
+            border-bottom: 2px solid #aaa;
+        }
+        .Modal_form select:focus{
+            border-bottom: 2px solid #3c73fd;
+        }
+        .Modal_button_area{
+            width: 100%;margin: auto;font-size: 64px;display: flex;flex-direction: row;
+        }
+        .Modal_button_area div{
+            height: 80px;width: 40%;margin: 30px auto;text-align: center;background: #eee;border-radius: 16px;
+        }
+        .Modal_single_button{
+            height: 80px;width: 100%;margin: 30px auto;text-align: center;background: #eee;border-radius: 16px;
+        }
+        .Modal_form_input_list{
+            height: 350px;overflow: scroll;
+        }
+        .Modal_form_input_item_box{
+            width: 100%;height: 90px;display: flex;flex-direction: row;align-items: center;
+        }
+        .Modal_form_input_item_box img{
+            width: 72px;height: 72px;
+            margin: 14px 0 14px -72px;
+        }
+        .Modal_form_switch{
+            width: 60%;height: 70px;margin: 0 auto;background: #eee;border-radius: 20px;display: flex;flex-direction: row;
+        }
+        .Modal_form_switch>div{
+            margin: 0;text-align: center;overflow: hidden;transition-duration: 0.4s;
+        }
+        .Modal_form_switch_current{
+            height: 79%;background: white;border-radius: 15px;
+        }
+        #page0{
+            width: 100%;height: 100%;position: absolute;background: #f3f3f3;overflow: scroll;
+        }
+        #page0>div:first-child{
+            background: #f3f3f3ee;
+        }
+        #Recents_Groups_search_box{
+            background: #f3f3f3ee;
+        }
+        #Recents_Groups_search_box>div:last-child{
+            background: rgb(226, 226, 232);
+        }
+        #page1{
+            width: 100%;height: 100%;position: absolute;overflow: scroll;
+        }
+        #page1>div:first-child{
+            background: #ffffffee;
+        }
+        @media(prefers-color-scheme: dark){/*https://blog.csdn.net/qq_36081714/article/details/130242846*/
+            html,body{
+                color: white;background: black;
+            }
+            #page0{
+                width: 100%;height: 100%;position: absolute;background: #000000ee;overflow: scroll;
+            }
+            #page0>div:first-child,#Recents_Groups_search_box{
+                background: #000000ee;
+            }
+            #Recents_Groups_search_box>div:last-child{
+                background: rgb(34, 34, 34);
+            }
+            .Recents_Groups_sticker{
+                background: rgb(34, 34, 34);
+            }
+            .Recents_Groups_sticker:hover{
+                background: rgba(34, 34, 34, .5);
+            }
+            .Buttons_on_the_top_menu_triangle div:nth-child(1){
+                border-bottom: 30px solid rgb(34, 34, 34);
+            }
+            .Buttons_on_the_top_menu_choice{
+                background: rgb(34, 34, 34);
+                border: 20px solid rgb(34, 34, 34);
+                box-shadow: 0 0 10px #888;
+            }
+            .Buttons_on_the_top_menu_choice:hover{
+                background: #444;
+                border: 20px solid #444;
+            }
+            .Modal_pop_ups{
+                background: #282828;
+            }
+            .Modal_form_switch{
+                background-color: #333;
+            }
+            .Modal_form_switch_current{
+                background: #444;
+            }
+            .Modal_single_button,.Modal_button_area div{
+                background: #333;
+            }
+            #page1{
+                background: black;
+            }
+            #page1>div:first-child{
+                background: #000000ee;
+            }
+            .Groups_sticker_split{
+                background: #222;
+                color: #aaa;
+            }
+            .Groups_sticker:hover{
+                background: #222;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="page1" style="display: none;">
+        <div style="position: fixed;top: 0;width: 100%;height: 160px;backdrop-filter: blur(100px);">
+            <div id="Groups_title_center" style="position: absolute;top: 80px;width: 100%;font-size: 45px;text-align: center;opacity: 0;"></div>
+        </div>
+        <div style="width: 100%;height: 150px;"></div>
+        <div id="Groups_title_left" style="width: 90%;height: 120px;margin: 0 auto;font-size: 100px;overflow: hidden;"><strong></strong></div>
+        <div style="width: 100%;height: 25px;"></div>
+    </div>
+    <div id="page0">
+        <div style="position: fixed;top: 0;width: 100%;height: 160px;backdrop-filter: blur(100px);">
+            <div id="Recents_Groups_title_center" style="position: absolute;top: 80px;width: 100%;font-size: 52px;text-align: center;opacity: 0;">Recent Groups</div>
+        </div>
+        <div style="width: 100%;height: 150px;"></div>
+        <div id="Recents_Groups_title_left" style="width: 90%;height: 120px;margin: 0 auto;font-size: 100px;"><strong>Recents</strong></div>
+        <div id="Recents_Groups_search_box" style="width: 100%;height: 120px;backdrop-filter: blur(100px);-webkit-backdrop-filter: blur(100px);top: 160px;overflow: hidden;">
+            <div id="Recents_Groups_search_box_cancel" style="width: 160px;margin: 35px -160px 35px 30px;float: right;color: #08f;">Cancel</div>
+            <div style="height: 90px;margin: 20px 5%;border-radius: 32px;overflow: hidden;flex-direction: row;display: flex;">
+                <div style="width: 90px;height: 90px;float: left;"><svg style="margin: 24px;" width="42" height="43" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" overflow="hidden"><g transform="translate(-576 -651)"><path d="M578.5 668.5C578.5 660.216 585.216 653.5 593.5 653.5 601.784 653.5 608.5 660.216 608.5 668.5 608.5 676.784 601.784 683.5 593.5 683.5 585.216 683.5 578.5 676.784 578.5 668.5Z" stroke="#888" stroke-width="4.58333" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/><path d="M603.5 679.5 615.493 691.493" stroke="#888" stroke-width="4.58333" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/></g></svg></div>
+                <input id="Recents_Groups_search_box_input" type="text" style="height: 90px;font-size: 50px;margin: 0;width: 100%;" autocomplete="off" placeholder="search">
+            </div>
+        </div>
+        <div id="Recents_Groups_search_box_under" style="width: 100%;height: 120px;display: none;"></div>
+    </div>
+    <!--hidden-->
+    <div style="display: none;">
+        <input id="upload_excel_input" type="file" accept=".xlsx,.json"/>
+        <a id="download_json_input" download="ButtonBugs Account Books.json" href="">download</a>
+        <!--Image Preload (display: none;)-->
+        <img src="object06buttonbugs_account_books/account_type/accommodation.svg">
+        <img src="object06buttonbugs_account_books/account_type/car_charge.svg">
+        <img src="object06buttonbugs_account_books/account_type/drinks.svg">
+        <img src="object06buttonbugs_account_books/account_type/education.svg">
+        <img src="object06buttonbugs_account_books/account_type/meal.svg">
+        <img src="object06buttonbugs_account_books/account_type/medical.svg">
+        <img src="object06buttonbugs_account_books/account_type/shopping.svg">
+        <img src="object06buttonbugs_account_books/account_type/ticket.svg">
+        <img src="object06buttonbugs_account_books/account_type/transportation.svg">
+    </div>
+    <!--Buttons on the top-->
+    <div id="more_Groups_btn" class="Buttons_on_the_top" style="left: 79%;opacity: 0;" tabindex="-1">
+        <!--more-->
+        <svg class="Buttons_on_the_top_img" width="73" height="72" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" overflow="hidden"><g transform="translate(-793 -648)"><path d="M17.25 36.375C17.25 39.8958 14.3958 42.75 10.875 42.75 7.35418 42.75 4.5 39.8958 4.5 36.375 4.5 32.8542 7.35418 30 10.875 30 14.3958 30 17.25 32.8542 17.25 36.375Z" fill="#3C73FD" transform="matrix(1.01389 0 0 1 793 648)"/><path d="M42 36.375C42 39.8958 39.1458 42.75 35.625 42.75 32.1042 42.75 29.25 39.8958 29.25 36.375 29.25 32.8542 32.1042 30 35.625 30 39.1458 30 42 32.8542 42 36.375Z" fill="#3C73FD" transform="matrix(1.01389 0 0 1 793 648)"/><path d="M66.75 36.375C66.75 39.8958 63.8958 42.75 60.375 42.75 56.8542 42.75 54 39.8958 54 36.375 54 32.8542 56.8542 30 60.375 30 63.8958 30 66.75 32.8542 66.75 36.375Z" fill="#3C73FD" transform="matrix(1.01389 0 0 1 793 648)"/></g></svg>
+    </div>
+    <div id="open_Recents_Groups_btn" class="Buttons_on_the_top" style="left: 73%;" tabindex="-1">
+        <!--books-->
+        <svg class="Buttons_on_the_top_img" width="72" height="72" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" overflow="hidden"><g transform="translate(-505 -648)"><path d="M572.95 675.225 569.05 673.8 569.05 665.625 572.95 663.975 546.55 654.225 514.45 665.475C511.375 666.975 511.3 671.1 511.3 674.475 511.3 675.6 511.45 676.725 511.675 677.775 509.125 679.425 509.05 683.25 509.05 686.475 509.05 689.1 509.65 691.5 511.3 693 510.925 694.275 511.15 695.85 511.15 697.725 511.15 701.1 512.05 704.175 515.05 705.225L535.9 713.85 572.8 698.55 568.9 697.125 568.9 688.875 572.8 687.225 566.8 684.975 566.8 677.775 572.95 675.225ZM515.35 670.725 536.2 678.9 566.125 666.825 566.125 673.275 536.2 685.725 515.35 677.475 515.35 670.725ZM565.975 696.6 536.05 708.975 515.125 700.725 515.125 694.875 533.8 702.525 566.05 689.775 565.975 696.6ZM563.875 685.35 533.95 697.725 513.1 689.475 513.1 682.725 534.55 691.275 563.95 678.975 563.95 685.35Z" stroke="" stroke-width="0.75" fill="#3C73FD"/></g></svg>
+    </div>
+    <div id="add_Recents_Groups_btn" class="Buttons_on_the_top" style="left: 85%;" tabindex="-1">
+        <!--plus-->
+        <svg class="Buttons_on_the_top_img" width="72" height="72" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" overflow="hidden"><g transform="translate(-721 -648)"><path d="M757.75 654 756.25 654 756.25 683.25 727 683.25 727 684.75 756.25 684.75 756.25 714 757.75 714 757.75 684.75 787 684.75 787 683.25 757.75 683.25 757.75 654Z" stroke="#3C73FD" stroke-width="4" fill="#3C73FD"/></g></svg>
+        <div class="Buttons_on_the_top_menu" style="left: 57%;">
+            <div class="Buttons_on_the_top_menu_controlled" style="display: unset;">
+                <div class="Buttons_on_the_top_menu_triangle">
+                    <div style="left: 75%;"></div>
+                </div>
+                <div class="Buttons_on_the_top_menu_choice" onclick="document.getElementById('upload_excel_input').click();">Import</div>
+                <div id="create_Recents_Groups_btn" class="Buttons_on_the_top_menu_choice">Create a new</div>
+                <div id="download_json" class="Buttons_on_the_top_menu_choice">Export JSON file</div>
+            </div>
+        </div>
+    </div>
+    <!--modal-->
+    <div id="Modal_Create_group" class="Modal_background">
+        <div class="Modal_pop_ups">
+            <div class="Modal_title">Create a new group</div>
+            <div class="Modal_form">
+                <div>Name</div>
+                <input type="text" placeholder="Please input the group name" autofocus/>
+                <div>Standard unit</div>
+                <select></select>
+                <div style="display: flex;align-items: center;">Members<img onclick="Modal_new_member();" src="object06buttonbugs_account_books/others/add.svg"></div>
+                <div class="Modal_form_input_list" style="margin-top: 0;"></div>
+                <div class="Modal_form_add_button" style="margin-top: 0;"></div>
+            </div>
+            <div class="Modal_button_area" style="margin-top: 30px;">
+                <div onclick="close_modal('Modal_Create_group');">Cancel</div>
+                <div style="color: #3c73fd" onclick="create_group();">Create</div>
+            </div>
+        </div>
+    </div>
+    <div id="Modal_Create_bill" class="Modal_background">
+        <div class="Modal_pop_ups">
+            <div class="Modal_title">Create a bill</div>
+            <div class="Modal_form" style="height: 64%;">
+                <div class="Modal_form_switch" style="margin-top: 0;">
+                    <div class="Modal_form_switch_current" style="width: 46%;margin: 1% -48% 0 2%;"></div>
+                    <div style="width: 50%;font-weight: bold;" onmousedown="event.target.parentElement.getElementsByTagName('div')[0].style.margin='1% -48% 0 2%';event.target.parentElement.getElementsByTagName('div')[1].style.fontWeight='bold';event.target.parentElement.getElementsByTagName('div')[2].style.fontWeight='unset';">Expense</div>
+                    <div style="width: 50%;font-weight: unset;" onmousedown="event.target.parentElement.getElementsByTagName('div')[0].style.margin='1% -98% 0 52%';event.target.parentElement.getElementsByTagName('div')[1].style.fontWeight='unset';event.target.parentElement.getElementsByTagName('div')[2].style.fontWeight='bold';">Income</div>
+                </div>
+                <div>Amount</div>
+                <input type="number" placeholder="0.00" oninput="menber_value_oninput(event);" autofocus/>
+                <div>Type</div>
+                <select onchange="var add_type=this.parentElement.getElementsByTagName('input')[1];add_type.style.display=this.value=='others'?'unset':'none';add_type.focus();"></select><br>
+                <input type="text" placeholder="Please input the custom type." style="display: none;">
+                <div>Date</div>
+                <input type="datetime-local"/>
+                <div>payer or payee</div>
+                <select></select>
+                <div class="Modal_form_switch">
+                    <div class="Modal_form_switch_current" style="width: 46%;margin: 1% -48% 0 2%;"></div>
+                    <div style="width: 50%;font-weight: bold;" onmousedown="event.target.parentElement.getElementsByTagName('div')[0].style.margin='1% -48% 0 2%';event.target.parentElement.getElementsByTagName('div')[1].style.fontWeight='bold';event.target.parentElement.getElementsByTagName('div')[2].style.fontWeight='unset';change_calc_mode(false,this);">Ratio</div>
+                    <div style="width: 50%;font-weight: unset;" onmousedown="event.target.parentElement.getElementsByTagName('div')[0].style.margin='1% -98% 0 52%';event.target.parentElement.getElementsByTagName('div')[1].style.fontWeight='unset';event.target.parentElement.getElementsByTagName('div')[2].style.fontWeight='bold';change_calc_mode(true,this);">Exact</div>
+                </div>
+                <div class="Modal_form_input_list" style="margin-top: 0;height: unset;overflow: unset;"></div>
+                <div>Description</div>
+                <input type="text"/>
+            </div>
+            <div class="Modal_button_area" style="margin-top: 30px;">
+                <div onclick="close_modal('Modal_Create_bill');">Cancel</div>
+                <div style="color: #3c73fd" onclick="create_bill();">Create</div>
+            </div>
+        </div>
+    </div>
+    <div id="Modal_Edit_bill" class="Modal_background">
+        <div class="Modal_pop_ups">
+            <div class="Modal_title">Edit</div>
+            <div class="Modal_form" style="height: 64%;">
+                <div class="Modal_form_switch" style="margin-top: 0;">
+                    <div class="Modal_form_switch_current" style="width: 46%;margin: 1% -48% 0 2%;"></div>
+                    <div style="width: 50%;font-weight: bold;" onmousedown="event.target.parentElement.getElementsByTagName('div')[0].style.margin='1% -48% 0 2%';event.target.parentElement.getElementsByTagName('div')[1].style.fontWeight='bold';event.target.parentElement.getElementsByTagName('div')[2].style.fontWeight='unset';">Expense</div>
+                    <div style="width: 50%;font-weight: unset;" onmousedown="event.target.parentElement.getElementsByTagName('div')[0].style.margin='1% -98% 0 52%';event.target.parentElement.getElementsByTagName('div')[1].style.fontWeight='unset';event.target.parentElement.getElementsByTagName('div')[2].style.fontWeight='bold';">Income</div>
+                </div>
+                <div>Amount</div>
+                <input type="number" placeholder="0.00" oninput="menber_value_oninput(event);" autofocus/>
+                <div>Type</div>
+                <select onchange="var add_type=this.parentElement.getElementsByTagName('input')[1];add_type.style.display=this.value=='others'?'unset':'none';add_type.focus();"></select><br>
+                <input type="text" placeholder="Please input the custom type." style="display: none;">
+                <div>Date</div>
+                <input type="datetime-local"/>
+                <div>payer or payee</div>
+                <select></select>
+                <div class="Modal_form_switch">
+                    <div class="Modal_form_switch_current" style="width: 46%;margin: 1% -48% 0 2%;"></div>
+                    <div style="width: 50%;font-weight: bold;" onmousedown="event.target.parentElement.getElementsByTagName('div')[0].style.margin='1% -48% 0 2%';event.target.parentElement.getElementsByTagName('div')[1].style.fontWeight='bold';event.target.parentElement.getElementsByTagName('div')[2].style.fontWeight='unset';change_calc_mode(false,this);">Ratio</div>
+                    <div style="width: 50%;font-weight: unset;" onmousedown="event.target.parentElement.getElementsByTagName('div')[0].style.margin='1% -98% 0 52%';event.target.parentElement.getElementsByTagName('div')[1].style.fontWeight='unset';event.target.parentElement.getElementsByTagName('div')[2].style.fontWeight='bold';change_calc_mode(true,this);">Exact</div>
+                </div>
+                <div class="Modal_form_input_list" style="margin-top: 0;height: unset;overflow: unset;"></div>
+                <div>Description</div>
+                <input type="text"/>
+                <div class="Modal_single_button" onclick="delete_bill();" style="color: red;">Delete the bill</div>
+            </div>
+            <div class="Modal_button_area" style="margin-top: 30px;">
+                <div onclick="close_modal('Modal_Edit_bill');">Cancel</div>
+                <div onclick="edit_bill_done();">Done</div>
+            </div>
+        </div>
+    </div>
+    <div id="Modal_More" class="Modal_background">
+        <div class="Modal_pop_ups">
+            <div class="Modal_title">Group settings</div>
+            <div class="Modal_form" style="height: 64%;">
+                <div>Group name</div>
+                <input type="text">
+                <div>Menbers</div>
+                <div class="Modal_form_input_list" style="margin-top: 0;height: unset;overflow: unset;"></div>
+                <div class="Modal_single_button" onclick="close_modal('Modal_More');">Done</div>
+                <div class="Modal_single_button" onclick="export_xlsx_file();">Export</div>
+                <div style="height: 1px;"></div>
+                <div class="Modal_single_button" onclick="delete_group();" style="color: red;">Delete the group</div>
+            </div>
+        </div>
+    </div>
+    <script src="/tools/sheetjs.js"></script>
+    <script>
+        var now=[0];
+        /*
+        0:recent groups
+        */
+        const available_account_type=['shopping','accommodation','car_charge','drinks','education','meal','medical','ticket','transportation'];
+        const available_currency_type={"USD":["$","US Dollar"],"AFN":["؋","Afghan Afghani"],"ALL":["L","Albanian Lek"],"DZD":["د.ج","Algerian Dinar"],"ARS":["$","Argentine Peso"],"AMD":["֏","Armenian Dram"],"AWG":["ƒ","Aruban Florin"],"AUD":["$","Australian Dollar"],"AZN":["₼","Azerbaijani Manat"],"BSD":["$","Bahamian Dollar"],"BHD":[".د.ب","Baharaini Dinar"],"BDT":["৳","Bangladeshi Taka"],"BBD":["$","Barbadian Dollar"],"BYN":["Br","Belarusian Ruble"],"BZD":["$","Belize Dollar"],"BMD":["$","Bermudian Dollar"],"BTN":["Nu.","Bhutanese Ngultrum"],"BTC":["","Bitcoin"],"BCH":["","Bitcoin Cash"],"VES":["Bs.","Bolívar Soberano"],"BOB":["Bs.","Bolivian Boliviano"],"BAM":["KM","Bosnian Convertible Marka"],"BWP":["P","Botswana Pula"],"BRL":["R$","Brazilian Real"],"BND":["$","Brunei Dollar"],"BGN":["лв.","Bulgarian Lev"],"BIF":["Fr","Burundian Franc"],"KHR":["៛","Cambodian Riel"],"CAD":["$","Canadian Dollar"],"CVE":["$","Cape Verdean Escudo"],"KYD":["$","Cayman Islands Dollar"],"XAF":["Fr","Central African CFA Franc"],"CLP":["$","Chilean Peso"],"CNH":["","Chinese Yuan Offshore"],"CNY":["¥","Chinese Yuan"],"COP":["$","Colombian Peso"],"KMF":["Fr","Comorian Franc"],"CDF":["Fr","Congolese Franc"],"CRC":["₡","Costa Rican Colón"],"HRK":["kn","Croatian Kuna"],"CUP":["$","Cuban Peso"],"CZK":["Kč","Czech Koruna"],"DKK":["kr","Danish Krone"],"DJF":["Fr","Djiboutian Franc"],"STN":["Db","Dobra"],"DOP":["$","Dominican Peso"],"XCD":["$","East Caribbean Dollar"],"ECS":["","Ecuador Sucre"],"EGP":["ج.م","Egyptian Pound"],"AED":["د.إ","Emirati Dirham"],"EEK":["","Estonian Kroon"],"ETH":["","Ethereum"],"ETB":["Br","Ethiopian Birr"],"EUR":["€","Euro"],"FKP":["£","Falkland Islands (Malvinas) Pound"],"FJD":["$","Fijian Dollar"],"XPF":["₣","French Pacific Franc"],"GMD":["D","Gambian Dalasi"],"GEL":["₾","Georgian Lari"],"GHS":["₵","Ghana Cedi"],"GIP":["£","Gibraltar Pound"],"XAU":["","Gold"],"GTQ":["Q","Guatemalan Quetzal"],"GNF":["Fr","Guinean Franc"],"GYD":["$","Guyana Dollar"],"HTG":["G","Haitian Gourde"],"HNL":["L","Honduran Lempira"],"HKD":["$","Hong Kong Dollar"],"HUF":["Ft","Hungarian Forint"],"ISK":["kr","Icelandic Krona"],"INR":["₹","Indian Rupee"],"IDR":["Rp","Indonesian Rupiah"],"IRR":["﷼","Iranian Rial"],"IQD":["ع.د","Iraqi Dinar"],"JMD":["$","Jamaican Dollar"],"JPY":["¥","Japanese Yen"],"JOD":["د.ا","Jordanian Dinar"],"KZT":["₸","Kazakhstani Tenge"],"KES":["Sh","Kenyan Shilling"],"KPW":["₩","Korea (North) Won"],"KWD":["د.ك","Kuwaiti Dinar"],"AOA":["Kz","Kwanza"],"KGS":["с","Kyrgyzstani Som"],"LAK":["₭","Lao Kip"],"LVL":["","Latvian Lats"],"LBP":["ل.ل","Lebanese Pound"],"LSL":["L","Lesotho Loti"],"LRD":["$","Liberian Dollar"],"LYD":["ل.د","Libyan Dinar"],"LTC":["","Litecoin"],"MOP":["P","Macanese Pataca"],"MKD":["ден","Macedonian Denar"],"MGA":["Ar","Malagasy Ariary"],"MWK":["MK","Malawian Kwacha"],"MYR":["RM","Malaysian Ringgit"],"MVR":[".ރ","Maldivian Rufiyaa"],"MRO":["","Mauritanian Ouguiya"],"MUR":["₨","Mauritian Rupee"],"MXN":["$","Mexican Peso"],"MDL":["L","Moldovan Leu"],"MNT":["₮","Mongolia Tughrik"],"MAD":["د.م.","Moroccan Dirham"],"MZN":["MT","Mozambican Metical"],"MMK":["Ks","Myanmar Kyat"],"ERN":["Nfk","Nakfa"],"NAD":["$","Namibian Dollar"],"NPR":["रू","Nepalese Rupee"],"ANG":["ƒ","Netherlands Antilles Guilder"],"ILS":["₪","New Israeli Sheqel"],"NZD":["$","New Zealand Dollar"],"NIO":["C$","Nicaraguan Córdoba"],"NGN":["₦","Nigerian Naira"],"NOK":["kr","Norwegian Krone"],"OMR":["ر.ع.","Omani Rial"],"MRU":["UM","Ouguiya"],"TOP":["T$","Pa’anga"],"PKR":["₨","Pakistan Rupee"],"XPD":["","Palladium"],"PAB":["B/.","Panamanian Balboa"],"PGK":["K","Papua New Guinean Kina"],"PYG":["₲","Paraguayan Guaraní"],"PEN":["S/.","Peruvian Nuevo Sol"],"PHP":["₱","Philippine Peso"],"XPT":["","Platinum"],"PLN":["zł","Polish Zloty"],"GBP":["£","Pound Sterling"],"QAR":["ر.ق","Qatari Rial"],"XRP":["","Ripple"],"RON":["lei","Romanian Leu"],"RUB":["₽","Russian Ruble"],"RWF":["Fr","Rwandan Franc"],"SHP":["£","Saint Helena Pound"],"SVC":["","Salvadoran Colon"],"STD":["","Sao Tomean Dobra"],"SAR":["ر.س","Saudi Riyal"],"XDR":["","SDR (Special Drawing Right)"],"RSD":["дин.","Serbian Dinar"],"SCR":["₨","Seychellois Rupee"],"SLL":["Le","Sierra Leonean Leone"],"XAG":["","Silver"],"SGD":["$","Singapore Dollar"],"SBD":["$","Solomon Islands Dollar"],"SOS":["Sh","Somali Shilling"],"TJS":["ЅМ","Somoni"],"ZAR":["R","South African Rand"],"KRW":["₩","South Korean Won"],"SSP":["£","South Sudanese Pound"],"LKR":["ரூ","Sri Lankan Rupee"],"SDG":["ج.س.","Sudanese Pound"],"SRD":["$","Suriname Dollar"],"SZL":["L","Swazi Lilangeni"],"SEK":["kr","Swedish Krona"],"CHF":["Fr.","Swiss Franc"],"SYP":["ل.س","Syrian Pound"],"TWD":["$","Taiwan Dollar"],"WST":["T","Tala"],"TZS":["Sh","Tanzanian Shilling"],"THB":["฿","Thai Baht"],"TTD":["$","Trinidad and Tobago Dollar"],"TND":["د.ت","Tunisian Dinar"],"TRY":["₺","Turkish Lira"],"TMT":["m","Turkmenistan Manat"],"UGX":["Sh","Ugandan Shilling"],"UAH":["₴","Ukrainian Hryvnia"],"CLF":["","Unidad de Fomento"],"UYU":["$","Uruguayan Peso"],"UZS":["so'm","Uzbekistani Som"],"VUV":["Vt","Vanuatu Vatu"],"VEF":["","Venezuelan Bolívar"],"VND":["₫","Vietnamese Dong"],"XOF":["Fr","West African CFA Franc"],"YER":["﷼","Yemeni Rial"],"ZMW":["ZK","Zambian Kwacha"]};//imported from https://www.bing.com/search?q=currency+calculator
+        var data=[/*
+            ['2023.08.12_Beijing trip','CNY',-656.17,1692776354922,['AC','AH','MC'],[
+                [1692937800675,'Beijing to New York','transportation','AH',-235.12,[0.5,0.2,0.3]],
+                [1692936800675,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],
+                [1692935800675,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],
+                [1692933800675,'充电','car_charge','AH',-235.12,[0.5,0.2,0.3]],
+                [1692932800675,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],
+                [1692931800675,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','education','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','medical','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'购物','shopping','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],
+                [123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],
+            ]],
+            ['2023.07.15_Beijing to London','CNY',-4093.26,12311973,['AC','AH','MC'],[[1692937800675,'asdf','transportation','AH',-235.12,[0.5,0.2,0.3]],[1692936800675,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[1692935800675,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[1692933800675,'充电','car_charge','AH',-235.12,[0.5,0.2,0.3]],[1692932800675,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[1692931800675,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','education','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','medical','AH',-235.12,[0.5,0.2,0.3]],[123845,'购物','shopping','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]]]],
+            ['2023.01.22_Beijing to London','CNY',-1273.74,12311973,['AC','AH','MC'],[[1692937800675,'asdf','transportation','AH',-235.12,[0.5,0.2,0.3]],[1692936800675,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[1692935800675,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[1692933800675,'充电','car_charge','AH',-235.12,[0.5,0.2,0.3]],[1692932800675,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[1692931800675,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','education','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','medical','AH',-235.12,[0.5,0.2,0.3]],[123845,'购物','shopping','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]]]],
+            ['2022.08.09_Beijing to London','CNY',-656.17,12311973,['AC','AH','MC'],[[1692937800675,'asdf','transportation','AH',-235.12,[0.5,0.2,0.3]],[1692936800675,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[1692935800675,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[1692933800675,'充电','car_charge','AH',-235.12,[0.5,0.2,0.3]],[1692932800675,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[1692931800675,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','education','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','medical','AH',-235.12,[0.5,0.2,0.3]],[123845,'购物','shopping','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]]]],
+            ['2023.08.09_Beijing trip','CNY',-656.17,12311973,['AC','AH','MC'],[[1692937800675,'asdf','transportation','AH',-235.12,[0.5,0.2,0.3]],[1692936800675,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[1692935800675,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[1692933800675,'充电','car_charge','AH',-235.12,[0.5,0.2,0.3]],[1692932800675,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[1692931800675,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','education','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','medical','AH',-235.12,[0.5,0.2,0.3]],[123845,'购物','shopping','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]]]],
+            ['2023.08.08_Beijing trip','CNY',-656.17,12311973,['AC','AH','MC'],[[1692937800675,'asdf','transportation','AH',-235.12,[0.5,0.2,0.3]],[1692936800675,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[1692935800675,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[1692933800675,'充电','car_charge','AH',-235.12,[0.5,0.2,0.3]],[1692932800675,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[1692931800675,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','education','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','medical','AH',-235.12,[0.5,0.2,0.3]],[123845,'购物','shopping','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]]]],
+            ['2023.08.07_Beijing trip','CNY',-656.17,12311973,['AC','AH','MC'],[[1692937800675,'asdf','transportation','AH',-235.12,[0.5,0.2,0.3]],[1692936800675,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[1692935800675,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[1692933800675,'充电','car_charge','AH',-235.12,[0.5,0.2,0.3]],[1692932800675,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[1692931800675,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','education','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','medical','AH',-235.12,[0.5,0.2,0.3]],[123845,'购物','shopping','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]]]],
+            ['2023.08.06_Beijing trip','CNY',-656.17,12311973,['AC','AH','MC'],[[1692937800675,'asdf','transportation','AH',-235.12,[0.5,0.2,0.3]],[1692936800675,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[1692935800675,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[1692933800675,'充电','car_charge','AH',-235.12,[0.5,0.2,0.3]],[1692932800675,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[1692931800675,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','education','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','medical','AH',-235.12,[0.5,0.2,0.3]],[123845,'购物','shopping','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]]]],
+            ['2023.08.05_Beijing trip','CNY',-656.17,12311973,['AC','AH','MC'],[[1692937800675,'asdf','transportation','AH',-235.12,[0.5,0.2,0.3]],[1692936800675,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[1692935800675,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[1692933800675,'充电','car_charge','AH',-235.12,[0.5,0.2,0.3]],[1692932800675,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[1692931800675,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','education','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','medical','AH',-235.12,[0.5,0.2,0.3]],[123845,'购物','shopping','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]]]],
+            ['2023.08.04_Beijing trip','CNY',-656.17,12311973,['AC','AH','MC'],[[1692937800675,'asdf','transportation','AH',-235.12,[0.5,0.2,0.3]],[1692936800675,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[1692935800675,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[1692933800675,'充电','car_charge','AH',-235.12,[0.5,0.2,0.3]],[1692932800675,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[1692931800675,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','education','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','medical','AH',-235.12,[0.5,0.2,0.3]],[123845,'购物','shopping','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]]]],
+            ['2023.08.03_Beijing trip','CNY',-656.17,12311973,['AC','AH','MC'],[[1692937800675,'asdf','transportation','AH',-235.12,[0.5,0.2,0.3]],[1692936800675,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[1692935800675,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[1692933800675,'充电','car_charge','AH',-235.12,[0.5,0.2,0.3]],[1692932800675,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[1692931800675,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','education','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','medical','AH',-235.12,[0.5,0.2,0.3]],[123845,'购物','shopping','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','drinks','AH',-235.12,[0.5,0.2,0.3]],[123845,'酒店','accommodation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','ticket','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','transportation','AH',-235.12,[0.5,0.2,0.3]],[123845,'吃饭','meal','AH',-235.12,[0.5,0.2,0.3]]]]
+        */];
+        //not allow \/:*?"<>|
+
+        //event
+        document.getElementById("Recents_Groups_search_box_input").onfocus=()=>{
+            document.getElementById("Recents_Groups_search_box_cancel").style.marginRight='30px';
+            document.getElementById("page0").scrollTo(0,110);
+        };
+        document.getElementById("Recents_Groups_search_box_input").onblur=()=>{
+            document.getElementById("Recents_Groups_search_box_cancel").style.marginRight='-160px';
+            document.getElementById("page0").scrollTo(0,0);
+        };
+        document.getElementById("Recents_Groups_search_box_cancel").onmousedown=()=>{
+            document.getElementById("Recents_Groups_search_box_input").value='';
+            document.getElementById("Recents_Groups_search_box_input").blur();
+        };
+        document.getElementById("open_Recents_Groups_btn").onclick=()=>{
+            if (now[0]==0) {
+                if (now.length>1) {
+                    document.getElementById("open_Recents_Groups_btn").getElementsByTagName('path')[0].setAttribute('fill','transparent');
+                    document.getElementById("open_Recents_Groups_btn").getElementsByTagName('path')[0].setAttribute('stroke','#3C73FD');
+                    document.getElementById("open_Recents_Groups_btn").getElementsByTagName('path')[0].setAttribute('stroke-width','2');
+                    document.getElementById("open_Recents_Groups_btn").style.left='4%';
+                    var e={'target':{'getAttribute':(name)=>{return now[1];}}};
+                    open_Group(e);
+                }
+            }else{
+                document.getElementById("open_Recents_Groups_btn").getElementsByTagName('path')[0].setAttribute('fill','#3C73FD');
+                document.getElementById("open_Recents_Groups_btn").getElementsByTagName('path')[0].setAttribute('stroke','');
+                document.getElementById("open_Recents_Groups_btn").getElementsByTagName('path')[0].setAttribute('stroke-width','0.75');
+                document.getElementById("open_Recents_Groups_btn").style.left='73%';
+                open_Recents_Groups();
+            }
+        };
+        document.getElementById("create_Recents_Groups_btn").onclick=()=>{
+            open_modal("Modal_Create_group");
+        };
+        document.getElementById("more_Groups_btn").onclick=()=>{
+            open_modal("Modal_More");
+        }
+        document.getElementById("add_Recents_Groups_btn").onclick=()=>{
+            if (now[0]==1) {
+                document.getElementById("Modal_Create_bill").getElementsByTagName("input")[2].value=new Date().format("yyyy-MM-dd hh:mm:ss.S");
+                open_modal("Modal_Create_bill");
+            }
+        };
+        document.getElementById("Modal_More").getElementsByTagName("input")[0].onblur=(event)=>{
+            if (event.target.value.length>0) {
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i][0]==now[1]) {
+                        //check existing
+                        for (let j = 0; j < data.length; j++) {
+                            if (data[j][0]==event.target.value) {
+                                if (i!=j) {
+                                    alert("The group "+data[j][0]+"already exists.")
+                                }
+                                event.target.value="";
+                                return;
+                            }
+                        }
+                        //rename
+                        data[i][0]=event.target.value;
+                        now[1]=event.target.value;
+                        document.getElementById("open_Recents_Groups_btn").click();
+                        document.getElementById("open_Recents_Groups_btn").click();
+                        db_setData();
+                        return;
+                    }
+                }
+            }
+        }
+        document.getElementById("page0").addEventListener('scroll', (e)=>{
+            //page0
+            var scrollTop=e.srcElement.scrollTop;
+            document.getElementById("Recents_Groups_title_center").style.opacity=scrollTop/80;
+            document.getElementById("Recents_Groups_title_left").style.fontSize=(100-scrollTop*0.2)+'px';
+            document.getElementById("Recents_Groups_search_box").style.position=scrollTop>110?'fixed':'';
+            document.getElementById("Recents_Groups_search_box_under").style.display=scrollTop>110?'':'none';
+        });
+        document.getElementById("page1").addEventListener('scroll', (e)=>{
+            //page1
+            var scrollTop=e.srcElement.scrollTop;
+            document.getElementById("Groups_title_center").style.opacity=scrollTop/80;
+            document.getElementById("Groups_title_left").style.fontSize=(100-scrollTop*0.2)+'px';
+        });
+        document.getElementById("download_json").onclick=()=>{
+            // https://blog.csdn.net/m0_52276756/article/details/129744970
+            var content = JSON.stringify(data);
+            var blob = new Blob([content], {type: "text/json;charset=utf-8"});
+            const objectURL = URL.createObjectURL(blob);
+            document.getElementById("download_json_input").setAttribute("href",objectURL);
+            document.getElementById("download_json_input").click();
+        }
+        document.getElementById("upload_excel_input").addEventListener('change',(event)=>{
+            const file = event.target.files[0];
+            const excelReader = new FileReader();
+            const jsonReader = new FileReader();
+            excelReader.onload = function(e) {
+                const file_data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(file_data, { type: 'array' });
+                const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+                const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+                //jsonData is the data in the first sheet
+                if (jsonData[0].length==11&&jsonData[0][0]=="Group name"&&jsonData[0][2].length>0&&(jsonData[0][10] in available_currency_type)) {
+                    console.log(jsonData);
+                    //process it
+                    var group=[jsonData[0][2],jsonData[0][10],0,Date.now(),jsonData[1].slice(11),[]];
+                    var group_details=jsonData.slice(2);
+                    for(let i=0;i<group_details.length;i++){
+                        var group_detail=[(new Date(group_details[i][0]+'/'+group_details[i][1]+'/'+group_details[i][2]+' '+group_details[i][3]+':'+group_details[i][4]+':'+group_details[i][5])).getTime()+group_details[i][6]];
+                        group_detail=group_detail.concat(group_details[i].slice(7,11))
+                        var costs_each_person=group_details[i].slice(11);
+                        var total=group_details[i][10];
+                        var costs_ratio=[];
+                        for (let j = 0; j < costs_each_person.length; j++) {
+                            costs_ratio.push(costs_each_person[j]/total);
+                        }
+                        group_detail.push(costs_ratio);
+                        group[2]+=total;
+                        group[5].push(group_detail);
+                    }
+                    //check existing
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i][0]==jsonData[0][2]) {
+                            if(confirm("The group "+jsonData[0][2]+" already exists.\nDo you want to replace it?")){
+                                data[i]=group;
+                                now[1]=jsonData[0][2];
+                                document.getElementById("open_Recents_Groups_btn").click();
+                                db_setData();
+                                return;
+                            }else{
+                                return;
+                            }
+                        }
+                    }
+                    //not exists
+                    data.unshift(group);
+                    now[1]=jsonData[0][2];
+                    document.getElementById("open_Recents_Groups_btn").click();
+                    db_setData();
+                } else {
+                    alert("Invalid xlsx file.");
+                }
+            };
+            jsonReader.onload = function(e) {
+                try {
+                    var jsonData=JSON.parse(e.target.result);
+                    console.log(jsonData);
+                    if (typeof(jsonData)=="object"&&typeof(jsonData.length)=="number") {
+                        for (let i = 0; i < jsonData.length; i++) {
+                            if (jsonData[i].length==6) {
+                                if (typeof(jsonData[i][0])=="string") {
+                                    var group_id=find_group(jsonData[i][0]);
+                                    if (group_id==undefined) {
+                                        data.push(jsonData[i]);
+                                    } else {
+                                        if (confirm("The group "+jsonData[i][0]+" already exists.\nDo you want to replace it?")) {
+                                            data[group_id]=jsonData[i];
+                                            if (now.length>1) {
+                                                now[1]=jsonData[i][0];
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    alert("Invalid json file.");
+                                    return;
+                                }
+                            } else {
+                                alert("Invalid json file.");
+                                return;
+                            }
+                        }
+                        open_Recents_Groups();
+                        db_setData();
+                    } else {
+                        alert("Invalid json file.");
+                    }
+                } catch (error) {
+                    alert("Invalid json file.");
+                }
+            }
+            //check file type
+            if (file.name.split('.').slice(-1)[0]=='xlsx') {
+                excelReader.readAsArrayBuffer(file);
+            } else if (file.name.split('.').slice(-1)[0]=='json') {
+                jsonReader.readAsText(file);
+            } else {
+                alert("The file type should be '.xlsx' or '.json'.");
+            }
+            document.getElementById("upload_excel_input").value="";
+        },false);
+        function find_group(group_name) {
+            for (let i = 0; i < data.length; i++) {
+                if (data[i][0]==group_name) {
+                    return i;
+                }
+            }
+        }
+        function open_modal(Modal_name) {
+            document.getElementById(Modal_name).style.top='0';
+            document.getElementById(Modal_name).style.opacity='1';
+            document.getElementById(Modal_name).getElementsByClassName("Modal_pop_ups")[0].style.bottom='0';
+            try {
+                if (["Modal_More","Modal_Edit_bill"].indexOf(Modal_name)==-1) {
+                    document.getElementById(Modal_name).getElementsByTagName("input")[0].focus();
+                }
+            } catch (e) {}
+        }
+        function close_modal(Modal_name) {
+            document.getElementById(Modal_name).style.top='-100%';
+            document.getElementById(Modal_name).style.opacity='0';
+            document.getElementById(Modal_name).getElementsByClassName("Modal_pop_ups")[0].style.bottom='-100%';
+        }
+        function clear_list(item_className) {
+            while (document.getElementsByClassName(item_className).length>0) {
+                document.getElementsByClassName(item_className)[0].outerHTML='';
+            }
+        }
+        function open_Group(e) {
+            var name=e.target.getAttribute('name');
+            document.getElementById("page0").style.marginLeft='-100%';
+            document.body.style.background='#fff';
+            document.getElementById("Groups_title_center").innerText=name;
+            document.getElementById("Groups_title_left").innerText=name;
+            document.getElementById("page1").style.display='';
+            document.getElementById("open_Recents_Groups_btn").getElementsByTagName('path')[0].setAttribute('fill','transparent');
+            document.getElementById("open_Recents_Groups_btn").getElementsByTagName('path')[0].setAttribute('stroke','#3C73FD');
+            document.getElementById("open_Recents_Groups_btn").getElementsByTagName('path')[0].setAttribute('stroke-width','2');
+            document.getElementById("open_Recents_Groups_btn").style.left='4%';
+            document.getElementById("more_Groups_btn").style.left='73%';
+            document.getElementById("more_Groups_btn").style.opacity='';
+            document.getElementById("add_Recents_Groups_btn").getElementsByClassName("Buttons_on_the_top_menu_controlled")[0].style.display='none';
+            document.getElementById("page1").scrollTo(0,0);
+            document.getElementById("Modal_Create_bill").getElementsByTagName("input")[0].value="";
+            document.getElementById("Modal_Create_bill").getElementsByClassName("Modal_form_switch")[0].getElementsByTagName('div')[0].style.margin='1% -48% 0 2%';document.getElementById("Modal_Create_bill").getElementsByClassName("Modal_form_switch")[0].getElementsByTagName('div')[1].style.fontWeight='bold';document.getElementById("Modal_Create_bill").getElementsByClassName("Modal_form_switch")[0].getElementsByTagName('div')[2].style.fontWeight='unset';
+            document.getElementById("Modal_Create_bill").getElementsByClassName("Modal_form_switch")[1].getElementsByTagName('div')[0].style.margin='1% -48% 0 2%';document.getElementById("Modal_Create_bill").getElementsByClassName("Modal_form_switch")[0].getElementsByTagName('div')[1].style.fontWeight='bold';document.getElementById("Modal_Create_bill").getElementsByClassName("Modal_form_switch")[1].getElementsByTagName('div')[2].style.fontWeight='unset';
+            document.getElementById("Modal_More").getElementsByTagName("input")[0].value="";
+            document.getElementById("Modal_More").getElementsByTagName("input")[0].placeholder=name;
+            document.getElementById("Modal_More").getElementsByClassName("Modal_form_input_list")[0].innerHTML="";
+            //more_Groups_btn
+            clear_list('Groups_sticker');
+            clear_list('Groups_sticker_split');
+            for(let i=0;i<data.length;i++){
+                if (data[i][0]==name) {
+                    now=[1,name];
+                    if (data[i][5].length>0) {
+                        var Groups_sticker_split_money=0;
+                        var Groups_stickers=[];
+                        var Groups_sticker_last_time=new Date(data[i][5][data[i][5].length-1][0]);
+                        var Groups_sticker_split_current_year=Groups_sticker_last_time.getFullYear();
+                        var Groups_sticker_split_current_month=Groups_sticker_last_time.getMonth()+1;
+                        var Groups_sticker_split_current_date=Groups_sticker_last_time.getDate();
+                        for (let j = data[i][5].length - 1 ; j >= 0 ; j--) {
+                            //createElement
+                            var Groups_sticker=document.createElement('div');
+                            var Groups_sticker_img=document.createElement('img');
+                            var Groups_sticker_text=document.createElement('div');
+                            var Groups_sticker_money=document.createElement('div');
+                            var Groups_sticker_mid=document.createElement('div');
+                            var Groups_sticker_name=document.createElement('div');
+                            var Groups_sticker_paid=document.createElement('div');
+                            //className
+                            Groups_sticker.className='Groups_sticker';
+                            Groups_sticker_img.className='Groups_sticker_img';
+                            Groups_sticker_text.className='Groups_sticker_text';
+                            Groups_sticker_money.className='Groups_sticker_money';
+                            Groups_sticker_mid.className='Groups_sticker_mid';
+                            Groups_sticker_name.className='Groups_sticker_name';
+                            Groups_sticker_paid.className='Groups_sticker_paid';
+                            //name
+                            Groups_sticker.setAttribute('name',j);
+                            Groups_sticker.onclick=(event)=>{
+                                //edit the bill
+                                var Modal_Edit_bill_form=document.getElementById("Modal_Edit_bill").getElementsByClassName("Modal_form")[0];
+                                Groups_sticker_id=event.target.getAttribute('name');
+                                now[2]=Groups_sticker_id;
+                                for (let k = 0; k < data.length; k++) {
+                                    if (data[k][0]==now[1]) {
+                                        var bill_detail=data[k][5][Groups_sticker_id];
+                                        break;
+                                    }
+                                }
+                                Modal_Edit_bill_form.children[0].children[0].style.margin=bill_detail[4]>0?'1% -98% 0px 52%':'1% -48% 0px 2%';
+                                Modal_Edit_bill_form.children[0].children[1].style.fontWeight=bill_detail[4]>0?'unset':'bold';
+                                Modal_Edit_bill_form.children[0].children[2].style.fontWeight=bill_detail[4]>0?'bold':'unset';
+                                Modal_Edit_bill_form.children[2].value=Math.abs(bill_detail[4]);
+                                Modal_Edit_bill_form.children[4].value=available_account_type.indexOf(bill_detail[2])>-1?bill_detail[2]:'others';
+                                Modal_Edit_bill_form.children[6].value=available_account_type.indexOf(bill_detail[2])>-1?'':bill_detail[2];
+                                Modal_Edit_bill_form.children[6].style.display=available_account_type.indexOf(bill_detail[2])>-1?'none':'unset';
+                                Modal_Edit_bill_form.children[8].value=new Date(bill_detail[0]).format("yyyy-MM-dd hh:mm:ss.S");
+                                Modal_Edit_bill_form.children[10].value=bill_detail[3];
+                                Modal_Edit_bill_form.children[11].children[0].style.margin='1% -48% 0px 2%';
+                                Modal_Edit_bill_form.children[11].children[1].style.fontWeight='bold';
+                                Modal_Edit_bill_form.children[11].children[2].style.fontWeight='unset';
+                                change_calc_mode(false,Modal_Edit_bill_form.getElementsByClassName("Modal_form_switch")[1].children[1]);
+                                for (let k = 0; k < bill_detail[5].length; k++) {
+                                    Modal_Edit_bill_form.children[12].children[k].children[1].value=(bill_detail[5][k]*Math.abs(bill_detail[4])).toFixed(2);
+                                }
+                                Modal_Edit_bill_form.children[14].value=bill_detail[1];
+                                open_modal("Modal_Edit_bill");
+                            };
+                            Groups_sticker_img.setAttribute('name',j);
+                            Groups_sticker_text.setAttribute('name',j);
+                            Groups_sticker_money.setAttribute('name',j);
+                            Groups_sticker_mid.setAttribute('name',j);
+                            Groups_sticker_name.setAttribute('name',j);
+                            Groups_sticker_paid.setAttribute('name',j);
+                            //content
+                            if (available_account_type.indexOf(data[i][5][j][2])>-1) {
+                                Groups_sticker_img.setAttribute('src','object06buttonbugs_account_books/account_type/'+data[i][5][j][2]+'.svg')
+                            } else {
+                                Groups_sticker_img.setAttribute('src','object06buttonbugs_account_books/account_type/shopping.svg')
+                            }
+                            Groups_sticker_money.innerText=available_currency_type[data[i][1]][0]+data[i][5][j][4].toFixed(2);
+                            Groups_sticker_name.innerText=data[i][5][j][1];
+                            Groups_sticker_paid.innerText=data[i][5][j][3]+' paid';
+                            //construction
+                            Groups_sticker.appendChild(Groups_sticker_img);
+                            Groups_sticker.appendChild(Groups_sticker_text);
+                            Groups_sticker_text.appendChild(Groups_sticker_money);
+                            Groups_sticker_text.appendChild(Groups_sticker_mid);
+                            Groups_sticker_mid.appendChild(Groups_sticker_name);
+                            Groups_sticker_mid.appendChild(Groups_sticker_paid);
+                            //split?
+                            var Groups_sticker_time=new Date(data[i][5][j][0]);
+                            var Groups_sticker_current_year=Groups_sticker_time.getFullYear();
+                            var Groups_sticker_current_month=Groups_sticker_time.getMonth()+1;
+                            var Groups_sticker_current_date=Groups_sticker_time.getDate();
+                            //put
+                            if (Groups_sticker_current_date!=Groups_sticker_split_current_date||Groups_sticker_current_month!=Groups_sticker_split_current_month||Groups_sticker_current_year!=Groups_sticker_split_current_year) {
+                                var Groups_sticker_split = document.createElement("div");
+                                var Groups_sticker_split_left = document.createElement("span");
+                                var Groups_sticker_split_right = document.createElement("span");
+                                Groups_sticker_split.setAttribute("class","Groups_sticker_split");
+                                Groups_sticker_split_left.innerText=Groups_sticker_split_current_year+'/'+Groups_sticker_split_current_month+'/'+Groups_sticker_split_current_date;
+                                Groups_sticker_split_right.innerText=available_currency_type[data[i][1]][0]+Groups_sticker_split_money.toFixed(2);
+                                Groups_sticker_split.appendChild(Groups_sticker_split_left);
+                                Groups_sticker_split.appendChild(Groups_sticker_split_right);
+                                Groups_stickers.unshift(Groups_sticker_split);
+                                //reset
+                                Groups_sticker_split_current_date=Groups_sticker_current_date;
+                                Groups_sticker_split_current_month=Groups_sticker_current_month;
+                                Groups_sticker_split_current_year=Groups_sticker_current_year;
+                                Groups_sticker_split_money=0;
+                            }
+                            Groups_sticker_split_money+=data[i][5][j][4];
+                            Groups_stickers.unshift(Groups_sticker);
+                        }
+                        var Groups_sticker_split = document.createElement("div");
+                        var Groups_sticker_split_left = document.createElement("span");
+                        var Groups_sticker_split_right = document.createElement("span");
+                        Groups_sticker_split.setAttribute("class","Groups_sticker_split");
+                        Groups_sticker_split_left.innerText=Groups_sticker_split_current_year+'/'+Groups_sticker_split_current_month+'/'+Groups_sticker_split_current_date;
+                        Groups_sticker_split_right.innerText=available_currency_type[data[i][1]][0]+Groups_sticker_split_money.toFixed(2);
+                        Groups_sticker_split.appendChild(Groups_sticker_split_left);
+                        Groups_sticker_split.appendChild(Groups_sticker_split_right);
+                        Groups_stickers.unshift(Groups_sticker_split);
+                        for (let j = 0; j < Groups_stickers.length; j++) {
+                            document.getElementById("page1").appendChild(Groups_stickers[j]);
+                        }
+                    }
+                    //menber
+                    for(let j=0;j<data[i][4].length;j++){
+                        //payer or payee
+                        var new_option=document.createElement('option');
+                        var new_option_edit=document.createElement('option');
+                        new_option.setAttribute('value',data[i][4][j]);
+                        new_option_edit.setAttribute('value',data[i][4][j]);
+                        new_option.innerHTML=data[i][4][j];
+                        new_option_edit.innerHTML=data[i][4][j];
+                        document.getElementById("Modal_Create_bill").getElementsByTagName("select")[1].appendChild(new_option);
+                        document.getElementById("Modal_Edit_bill").getElementsByTagName("select")[1].appendChild(new_option_edit);
+                        //menber
+                        var menber_box=document.createElement('div');
+                        var menber_name=document.createElement('div');
+                        var menber_value=document.createElement('input');
+                        menber_box.setAttribute("class","Modal_form_input_item_box");
+                        menber_name.style='width: 28%;overflow: scroll;';
+                        menber_name.innerText=data[i][4][j];
+                        menber_value.style='width: 72%;';
+                        menber_value.value="1";
+                        menber_value.setAttribute("placeholder","0");
+                        menber_value.setAttribute("type","number");
+                        menber_value.oninput=menber_value_oninput;
+                        menber_box.appendChild(menber_name);
+                        menber_box.appendChild(menber_value);
+                        document.getElementById("Modal_Create_bill").getElementsByClassName("Modal_form_input_list")[0].appendChild(menber_box);
+                        //menber_edit
+                        var menber_box_edit=document.createElement('div');
+                        var menber_name_edit=document.createElement('div');
+                        var menber_value_edit=document.createElement('input');
+                        menber_box_edit.setAttribute("class","Modal_form_input_item_box");
+                        menber_name_edit.style='width: 28%;overflow: scroll;';
+                        menber_name_edit.innerText=data[i][4][j];
+                        menber_value_edit.style='width: 72%;';
+                        menber_value_edit.value="1";
+                        menber_value_edit.setAttribute("placeholder","0");
+                        menber_value_edit.setAttribute("type","number");
+                        menber_value_edit.oninput=menber_value_oninput;
+                        menber_box_edit.appendChild(menber_name_edit);
+                        menber_box_edit.appendChild(menber_value_edit);
+                        document.getElementById("Modal_Edit_bill").getElementsByClassName("Modal_form_input_list")[0].appendChild(menber_box_edit);
+                        //menbers in setting
+                        var setting_menber_box=document.createElement('div');
+                        var setting_menber_value=document.createElement('input');
+                        setting_menber_value.setAttribute("name",j);
+                        setting_menber_value.setAttribute("placeholder",data[i][4][j]);
+                        setting_menber_value.onblur=(event)=>{
+                            var setting_menber_value_t=event.target;
+                            if (setting_menber_value_t.value.length>0) {
+                                for (let k = 0; k < data.length; k++) {
+                                    if (data[k][0]==now[1]) {
+                                        var setting_menber_origin=data[k][4][setting_menber_value_t.name];
+                                        for (let l = 0; l < data[k][5].length; l++) {
+                                            if (data[k][5][l][3]==setting_menber_origin) {
+                                                data[k][5][l][3]=setting_menber_value_t.value;
+                                            }
+                                        }
+                                        data[k][4][setting_menber_value_t.name]=setting_menber_value_t.value;
+                                        document.getElementById("open_Recents_Groups_btn").click();
+                                        document.getElementById("open_Recents_Groups_btn").click();
+                                        db_setData();
+                                        break;
+                                    }
+                                }
+                            }
+                        };
+                        setting_menber_box.appendChild(setting_menber_value);
+                        document.getElementById("Modal_More").getElementsByClassName("Modal_form_input_list")[0].appendChild(setting_menber_box);
+                    }
+                    break;
+                }
+            }
+        }
+        function open_Recents_Groups() {
+            document.getElementById("page0").scrollTo(0,0);
+            document.getElementById("page0").style.marginLeft='';
+            document.body.style.background='';
+            document.getElementById("page1").style.display='none';
+            document.getElementById("more_Groups_btn").style.left='79%';
+            document.getElementById("more_Groups_btn").style.opacity='0';
+            document.getElementById("add_Recents_Groups_btn").getElementsByClassName("Buttons_on_the_top_menu_controlled")[0].style.display='unset';
+            document.getElementById("Modal_Create_bill").getElementsByClassName("Modal_form_input_list")[0].innerHTML="";
+            document.getElementById("Modal_Edit_bill").getElementsByClassName("Modal_form_input_list")[0].innerHTML="";
+            document.getElementById("Modal_Create_bill").getElementsByTagName("select")[1].innerHTML="";
+            document.getElementById("Modal_Edit_bill").getElementsByTagName("select")[1].innerHTML="";
+            now[0]=0;
+            clear_list('Recents_Groups_sticker');
+            for(let i=0;i<data.length;i++){
+                //createElement
+                var Recents_Groups_sticker=document.createElement('div');
+                var Recents_Groups_sticker_top=document.createElement('div');
+                var Recents_Groups_sticker_row=document.createElement('div');
+                var Recents_Groups_sticker_pic_div=document.createElement('div');
+                var Recents_Groups_sticker_column=document.createElement('div');
+                var Recents_Groups_sticker_name=document.createElement('div');
+                var Recents_Groups_sticker_money=document.createElement('div');
+                var Recents_Groups_sticker_right=document.createElement('div');
+                //className
+                Recents_Groups_sticker.className='Recents_Groups_sticker';
+                Recents_Groups_sticker_top.className='Recents_Groups_sticker_top';
+                Recents_Groups_sticker_row.className='Recents_Groups_sticker_row';
+                Recents_Groups_sticker_pic_div.className='Recents_Groups_sticker_pic_div';
+                Recents_Groups_sticker_column.className='Recents_Groups_sticker_column';
+                Recents_Groups_sticker_name.className='Recents_Groups_sticker_name';
+                Recents_Groups_sticker_money.className='Recents_Groups_sticker_money';
+                Recents_Groups_sticker_right.className='Recents_Groups_sticker_right';
+                //name
+                Recents_Groups_sticker.setAttribute('name',data[i][0])
+                Recents_Groups_sticker_top.setAttribute('name',data[i][0])
+                Recents_Groups_sticker_row.setAttribute('name',data[i][0])
+                Recents_Groups_sticker_pic_div.setAttribute('name',data[i][0])
+                Recents_Groups_sticker_column.setAttribute('name',data[i][0])
+                Recents_Groups_sticker_name.setAttribute('name',data[i][0])
+                Recents_Groups_sticker_money.setAttribute('name',data[i][0])
+                Recents_Groups_sticker_right.setAttribute('name',data[i][0])
+                //content
+                Recents_Groups_sticker_pic_div.innerHTML='<svg style="margin: 14px;" width="72" height="72" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" overflow="hidden"><g transform="translate(-421 -100)"><path d="M485.5 153.25 483.25 155.5 431.5 155.5 428.5 152.5 428.5 137.5 431.5 134.5 483.25 134.5 485.5 136.75 485.5 153.25ZM424 130 424 160 490 160 490 130 424 130Z" fill="#3c73fd"/><path d="M463 145C463 149.142 460.314 152.5 457 152.5 453.686 152.5 451 149.142 451 145 451 140.858 453.686 137.5 457 137.5 460.314 137.5 463 140.858 463 145Z" fill="#3c73fd"/><path d="M440.5 145C440.5 146.243 439.493 147.25 438.25 147.25 437.007 147.25 436 146.243 436 145 436 143.757 437.007 142.75 438.25 142.75 439.493 142.75 440.5 143.757 440.5 145Z" fill="#3c73fd"/><path d="M478 145C478 146.243 476.993 147.25 475.75 147.25 474.507 147.25 473.5 146.243 473.5 145 473.5 143.757 474.507 142.75 475.75 142.75 476.993 142.75 478 143.757 478 145Z" fill="#3c73fd"/><path d="M470.425 115.525 471.55 118.375 476.05 117.475 472.9 109.6 432.55 126.1 455.65 121.525Z" fill="#3c73fd"/><path d="M466.525 127 478.375 124.675 478.9 127 483.475 127 481.975 119.35 443.5 127Z" fill="#3c73fd"/></g></svg>';
+                Recents_Groups_sticker_name.innerText=data[i][0];
+                Recents_Groups_sticker_money.innerText=data[i][2].toFixed(2)+data[i][1];
+                Recents_Groups_sticker_right.innerText='>';
+                //construction
+                Recents_Groups_sticker.appendChild(Recents_Groups_sticker_top);
+                Recents_Groups_sticker.appendChild(Recents_Groups_sticker_row);
+                Recents_Groups_sticker_row.appendChild(Recents_Groups_sticker_pic_div);
+                Recents_Groups_sticker_row.appendChild(Recents_Groups_sticker_column);
+                Recents_Groups_sticker_row.appendChild(Recents_Groups_sticker_right);
+                Recents_Groups_sticker_column.appendChild(Recents_Groups_sticker_name);
+                Recents_Groups_sticker_column.appendChild(Recents_Groups_sticker_money);
+                //event
+                Recents_Groups_sticker.onmousedown=open_Group;
+                //put
+                document.getElementById("page0").appendChild(Recents_Groups_sticker);
+            }
+        }
+        function create_group() {
+            var group_name=document.getElementById("Modal_Create_group").getElementsByTagName("input")[0].value;
+            var currency=document.getElementById("Modal_Create_group").getElementsByTagName("select")[0].value;
+            if (group_name.length>0) {
+                //check existing
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i][0]==group_name) {
+                        alert("The group "+group_name+" already exists.");
+                        return;
+                    }
+                }
+                //new list
+                var menber_inputs=document.getElementById("Modal_Create_group").getElementsByClassName("Modal_form_input_list")[0].getElementsByTagName("input");
+                var menbers=[];
+                for (let i = 0; i < menber_inputs.length; i++) {
+                    var menber=menber_inputs[i].value;
+                    if (menber.length>0&&menbers.indexOf(menber)==-1) {
+                        menbers.push(menber);
+                    }
+                }
+                if (menbers.length>0) {
+                    data.unshift([group_name,currency,0.0,Date.now(),menbers,[]]);
+                    close_modal("Modal_Create_group");
+                    now[1]=group_name;
+                    document.getElementById("open_Recents_Groups_btn").click();
+                    db_setData();
+                } else {
+                    alert("There must be AT LEAST ONE menber.");
+                }
+            } else {
+                alert("The group name should NOT be empty.");
+            }
+        }
+        function delete_group() {
+            if (confirm("Do you want to delete "+now[1])) {
+                close_modal("Modal_More");
+                for (let i = 0; i < data.length; i++) {
+                    if (data[i][0]==now[1]) {
+                        data.splice(i,1);
+                        if (data.length>0) {
+                            now[1]=data[0][0];
+                            document.getElementById("open_Recents_Groups_btn").click();
+                        }else{
+                            document.getElementById("open_Recents_Groups_btn").click();
+                            now=[0];
+                            document.getElementById("open_Recents_Groups_btn").getElementsByTagName('path')[0].setAttribute('fill','#cccccc');
+                            document.getElementById("open_Recents_Groups_btn").getElementsByTagName('path')[0].setAttribute('stroke','');
+                            document.getElementById("open_Recents_Groups_btn").getElementsByTagName('path')[0].setAttribute('stroke-width','0.75');
+                        }
+                        db_setData();
+                        return;
+                    }
+                }
+            }
+        }
+        function create_bill(){
+            var Modal_Create_bill=document.getElementById("Modal_Create_bill");
+            var amount=Number(Modal_Create_bill.getElementsByTagName("input")[0].value);
+            if (amount>0) {
+                var apportion_values=[];
+                var apportion_total=0;
+                var apportion_inputs=Modal_Create_bill.getElementsByClassName("Modal_form_input_list")[0].getElementsByTagName("input");
+                for (let i = 0; i < apportion_inputs.length; i++) {
+                    var apportion_value=Number(apportion_inputs[i].value);
+                    apportion_values.push(apportion_value);
+                    apportion_total+=apportion_value;
+                }
+                if (apportion_total>0) {
+                    for (let i = 0; i < apportion_values.length; i++) {
+                        apportion_values[i]/=apportion_total;
+                    }
+                    var description=Modal_Create_bill.getElementsByClassName("Modal_form")[0].lastElementChild.value;
+                    if (description.length>0) {
+                        var time=new Date(Modal_Create_bill.getElementsByTagName("input")[2].value).getTime();
+                        var bill_type=Modal_Create_bill.getElementsByTagName("select")[0].value;
+                        var bill_type_other=Modal_Create_bill.getElementsByTagName("input")[1].value;
+                        if (bill_type=='others'&&bill_type_other.length>0) {
+                            bill_type=bill_type_other;
+                        }
+                        var payer_or_payee=Modal_Create_bill.getElementsByTagName("select")[1].value;
+                        if (Modal_Create_bill.getElementsByClassName("Modal_form_switch")[0].children[1].style.fontWeight=='bold') {
+                            amount*=-1;
+                        }
+                        //add to data
+                        var new_item=[
+                            time,
+                            description,
+                            bill_type,
+                            payer_or_payee,
+                            amount,
+                            apportion_values
+                        ]
+                        for (let i = 0; i < data.length; i++) {
+                            if (data[i][0]==now[1]) {
+                                data[i][3]=time;
+                                for (let j = 0; j < data[i][5].length; j++) {
+                                    if (data[i][5][j][0]<=time) {
+                                        data[i][5].splice(j,0,new_item);
+                                        close_modal("Modal_Create_bill");
+                                        group_total(i);
+                                        document.getElementById("open_Recents_Groups_btn").click();
+                                        document.getElementById("open_Recents_Groups_btn").click();
+                                        db_setData();
+                                        return;
+                                    }
+                                }
+                                data[i][5].push(new_item);
+                                close_modal("Modal_Create_bill");
+                                group_total(i);
+                                document.getElementById("open_Recents_Groups_btn").click();
+                                document.getElementById("open_Recents_Groups_btn").click();
+                                db_setData();
+                                return;
+                            }
+                        }
+                    } else {
+                        alert("The description should NOT be empty.");
+                        return;
+                    }
+                } else {
+                    alert("The total of Ratio or Exact should not be zero.");
+                    return;
+                }
+            } else {
+                alert("The amount should MORE THAN 0.");
+                return;
+            }
+        }
+        function edit_bill_done(){
+            var Modal_Edit_bill=document.getElementById("Modal_Edit_bill");
+            var amount=Number(Modal_Edit_bill.getElementsByTagName("input")[0].value);
+            if (amount>0) {
+                var apportion_values=[];
+                var apportion_total=0;
+                var apportion_inputs=Modal_Edit_bill.getElementsByClassName("Modal_form_input_list")[0].getElementsByTagName("input");
+                for (let i = 0; i < apportion_inputs.length; i++) {
+                    var apportion_value=Number(apportion_inputs[i].value);
+                    apportion_values.push(apportion_value);
+                    apportion_total+=apportion_value;
+                }
+                if (apportion_total>0) {
+                    for (let i = 0; i < apportion_values.length; i++) {
+                        apportion_values[i]/=apportion_total;
+                    }
+                    var description=Modal_Edit_bill.getElementsByClassName("Modal_form")[0].children[14].value;
+                    if (description.length>0) {
+                        var time=new Date(Modal_Edit_bill.getElementsByTagName("input")[2].value).getTime();
+                        var bill_type=Modal_Edit_bill.getElementsByTagName("select")[0].value;
+                        var bill_type_other=Modal_Edit_bill.getElementsByTagName("input")[1].value;
+                        if (bill_type=='others'&&bill_type_other.length>0) {
+                            bill_type=bill_type_other;
+                        }
+                        var payer_or_payee=Modal_Edit_bill.getElementsByTagName("select")[1].value;
+                        if (Modal_Edit_bill.getElementsByClassName("Modal_form_switch")[0].children[1].style.fontWeight=='bold') {
+                            amount*=-1;
+                        }
+                        //add to data
+                        var new_item=[
+                            time,
+                            description,
+                            bill_type,
+                            payer_or_payee,
+                            amount,
+                            apportion_values
+                        ]
+                        for (let i = 0; i < data.length; i++) {
+                            if (data[i][0]==now[1]) {
+                                data[i][5].splice(now[2],1);//delete original bill
+                                data[i][3]=time;
+                                for (let j = 0; j < data[i][5].length; j++) {
+                                    if (data[i][5][j][0]<=time) {
+                                        data[i][5].splice(j,0,new_item);
+                                        close_modal("Modal_Edit_bill");
+                                        group_total(i);
+                                        document.getElementById("open_Recents_Groups_btn").click();
+                                        document.getElementById("open_Recents_Groups_btn").click();
+                                        db_setData();
+                                        return;
+                                    }
+                                }
+                                data[i][5].push(new_item);
+                                close_modal("Modal_Edit_bill");
+                                group_total(i);
+                                document.getElementById("open_Recents_Groups_btn").click();
+                                document.getElementById("open_Recents_Groups_btn").click();
+                                db_setData();
+                                return;
+                            }
+                        }
+                    } else {
+                        alert("The description should NOT be empty.");
+                        return;
+                    }
+                } else {
+                    alert("The total of Ratio or Exact should not be zero.");
+                    return;
+                }
+            } else {
+                alert("The amount should MORE THAN 0.");
+                return;
+            }
+        }
+        function delete_bill() {
+            for (let i = 0; i < data.length; i++) {
+                if (data[i][0]==now[1]) {
+                    if (confirm('Do you want to delete '+data[i][5][now[2]][1])) {
+                        data[i][5].splice(now[2],1);
+                        close_modal("Modal_Edit_bill");
+                        group_total(i);
+                        document.getElementById("open_Recents_Groups_btn").click();
+                        document.getElementById("open_Recents_Groups_btn").click();
+                        db_setData();
+                        return;
+                    }
+                }
+            }
+        }
+        function group_total(i) {
+            var total=0;
+            for (let j = 0; j < data[i][5].length; j++) {
+                total+=data[i][5][j][4];
+            }
+            data[i][2]=total;
+        }
+        function Modal_new_member() {
+            var Modal_input_list_new_item=document.createElement('div');
+            Modal_input_list_new_item.className="Modal_form_input_item_box";
+            Modal_input_list_new_item.innerHTML=`<input type="text" placeholder="Please input his/her name."/><img onmousedown="event.target.parentElement.outerHTML='';" src="object06buttonbugs_account_books/others/remove.svg">`;
+            document.getElementById("Modal_Create_group").getElementsByClassName('Modal_form_input_list')[0].appendChild(Modal_input_list_new_item);
+            var Modal_input_list=Modal_input_list_new_item.getElementsByTagName('input');
+            Modal_input_list[Modal_input_list.length-1].focus();
+        }
+        function change_calc_mode(if_exact,target) {
+            var Modal=target.parentElement.parentElement.parentElement.parentElement;
+            var calc_input=Modal.getElementsByClassName("Modal_form_input_list")[0].lastChild.lastChild;
+            if (if_exact) {
+                calc_input.oninput=()=>{};
+                calc_input.disabled=true;
+                calc_input.setAttribute("type","text");
+            } else {
+                calc_input.oninput=menber_value_oninput;
+                calc_input.disabled=false;
+                calc_input.setAttribute("type","number");
+            }
+            calc_last_menber(Modal);
+        }
+        function menber_value_oninput(event) {
+            positive_float_input(event);
+            var Modal=event.target.parentElement.parentElement.getElementsByTagName("input")[0].parentElement.parentElement.parentElement;
+            calc_last_menber(Modal);
+        }
+        function calc_last_menber(Modal) {
+            var Modal_Create_bill=Modal;
+            if (Modal_Create_bill.getElementsByClassName("Modal_form_switch")[1].children[2].style.fontWeight=="bold") {
+                var total=Number(Modal_Create_bill.getElementsByTagName("input")[0].value);
+                var menber_inputs=Modal_Create_bill.getElementsByClassName("Modal_form_input_list")[0].getElementsByTagName("input");
+                let i;
+                for (i = 0; i < menber_inputs.length-1; i++) {
+                    total-=Number(menber_inputs[i].value);
+                }
+                menber_inputs[i].value=total.toFixed(2);
+            }
+        }
+        function positive_float_input(event) {
+            var values=event.target.value.replaceAll(/[^0-9.]/g,'').split('.');
+            if (values.length>1) {
+                if (values[1].length>0) {
+                    values[1]=values[1].slice(0,2);
+                    event.target.value=values.join('.');
+                    return;
+                }
+            }
+            event.target.value=event.target.value.replaceAll(/[^0-9.]/g,'');
+        }
+        function export_xlsx_file() {
+            var group_data=[];
+            for (let i = 0; i < data.length; i++) {
+                if (data[i][0]==now[1]) {
+                    group_data=data[i];
+                }
+            }
+            var row0=[];
+            row0[0]="Group name";
+            row0[2]=group_data[0];
+            row0[10]=group_data[1];
+            var row1=["year","month","day","hour","minute","second","millisecond","item","type","payer or payee","total"].concat(group_data[4]);
+            var table_json=[row0,row1];
+            for (let i = 0; i < group_data[5].length; i++) {
+                var group_data_detail=group_data[5][i];
+                var group_data_date=new Date(group_data_detail[0]);
+                var row=[
+                    group_data_date.getFullYear(),
+                    group_data_date.getMonth()+1,
+                    group_data_date.getDate(),
+                    group_data_date.getHours(),
+                    group_data_date.getMinutes(),
+                    group_data_date.getSeconds(),
+                    group_data_date.getMilliseconds(),
+                    group_data_detail[1],
+                    group_data_detail[2],
+                    group_data_detail[3],
+                    group_data_detail[4],
+                ];
+                for (let j = 0; j < group_data_detail[5].length; j++) {
+                    row.push(group_data_detail[5][j]*group_data_detail[4]);
+                }
+                table_json.push(row);
+            }
+            var ws=XLSX.utils.aoa_to_sheet(table_json);
+            console.log(ws);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, name);
+            XLSX.writeFile(wb, group_data[0].replaceAll('\/:*?"<>|','_')+".xlsx");
+        }
+        //prototype
+        Date.prototype.format = function (format) {
+            var date = {
+                "M+": this.getMonth() + 1,
+                "d+": this.getDate(),
+                "h+": this.getHours(),
+                "m+": this.getMinutes(),
+                "s+": this.getSeconds(),
+                "q+": Math.floor((this.getMonth() + 3) / 3),
+                "S+": this.getMilliseconds()
+            };
+            if (/(y+)/i.test(format)) {
+                format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
+            }
+            for (var k in date) {
+                if (new RegExp("(" + k + ")").test(format)) {
+                    format = format.replace(RegExp.$1, RegExp.$1.length == 1? date[k] : ("00" + date[k]).substr(("" + date[k]).length));
+                }
+            }
+            return format;
+        }
+        //https://zhuanlan.zhihu.com/p/584747744
+        //https://zhuanlan.zhihu.com/p/612715495
+        function addData(db, storeName, data) {
+            let request = db.transaction([storeName], 'readwrite') // 事务对象 指定表格名称和操作模式（"只读"或"读写"）
+                .objectStore(storeName) // 仓库对象
+                .add(data)
+
+            request.onsuccess = function (event) {
+                console.log('数据写入成功')
+            }
+
+            request.onerror = function (event) {
+                console.log('数据写入失败')
+                throw new Error(event.target.error)
+            }
+        }
+        function getDataByKey(db, storeName, key) {
+            let transaction = db.transaction([storeName]) // 事务
+            let objectStore = transaction.objectStore(storeName) // 仓库对象
+            let request = objectStore.get(key)
+
+            request.onerror = function (event) {
+                console.log('事务失败')
+            }
+        
+            request.onsuccess = function (event) {
+                console.log('主键查询结果: ', request.result)
+            }
+        }
+
+        // 根据id修改数
+        function updateDB(db, storeName, data) {
+            let request = db.transaction([storeName], 'readwrite') // 事务对象
+                .objectStore(storeName) // 仓库对象
+                .put(data)
+        
+            request.onsuccess = function () {
+                console.log('数据更新成功')
+            }
+        
+            request.onerror = function () {
+                console.log('数据更新失败')
+            }
+        }
+
+        // 根据id删除数据
+        function deleteDB(db, storeName, id) {
+            let request = db.transaction([storeName], 'readwrite').objectStore(storeName).delete(id)
+        
+            request.onsuccess = function () {
+                console.log('数据删除成功')
+            }
+        
+            request.onerror = function () {
+                console.log('数据删除失败')
+            }
+        }
+        var db;
+        var storeName="buttonbugs_account_books_data";
+        var dbName="buttonbugs_account_books_data";
+        var request=window.indexedDB.open(dbName,'1.0');
+        request.onsuccess = function (e) {
+            db = e.target.result;
+            try {
+                var getResult= db.transaction([storeName]).objectStore(storeName).get(0);
+                getResult.onsuccess=()=>{
+                    if (getResult.result) {
+                        data=getResult.result.data;
+                    } else {
+                        let addResult = db.transaction([storeName], 'readwrite').objectStore(storeName).add({id:0,data:[]});
+                    }
+                    //start up
+                    if (data.length>0) {
+                        now[1]=data[0][0];
+                    }else{
+                        document.getElementById("open_Recents_Groups_btn").getElementsByTagName('path')[0].setAttribute('fill','#cccccc');
+                        document.getElementById("open_Recents_Groups_btn").getElementsByTagName('path')[0].setAttribute('stroke','');
+                        document.getElementById("open_Recents_Groups_btn").getElementsByTagName('path')[0].setAttribute('stroke-width','0.75');
+                    }
+                    open_Recents_Groups();
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        request.onupgradeneeded = function (event) {
+            console.log('onupgradeneeded')
+            db = event.target.result
+            let objectStore
+            if (!db.objectStoreNames.contains(storeName)) {
+                objectStore = db.createObjectStore(storeName, {
+                    keyPath: 'id'
+                })
+                //objectStore.createIndex('name', 'name', { unique: true }) 
+            }
+        };
+        //wrap_db
+        function db_setData() {
+            db.transaction([storeName], 'readwrite').objectStore(storeName).put({id:0,data:data});
+        }
+        function db_getData(db_next=()=>{}) {
+            var getResult= db.transaction([storeName]).objectStore(storeName).get(0);
+            getResult.onsuccess=()=>{
+                data=getResult.result.data;
+                db_next();
+            }
+        }
+        //currency Modal_Edit_bill
+        for (let i in available_currency_type) {
+            var new_option=document.createElement('option');
+            new_option.setAttribute('value',i);
+            new_option.innerHTML='<strong>'+i+'</strong> - '+available_currency_type[i][0]+' ('+available_currency_type[i][1]+')';
+            document.getElementById("Modal_Create_group").getElementsByTagName("select")[0].appendChild(new_option);
+        }
+        for (let i in available_account_type) {
+            var new_option=document.createElement('option');
+            var new_option_edit=document.createElement('option');
+            new_option.setAttribute('value',available_account_type[i]);
+            new_option_edit.setAttribute('value',available_account_type[i]);
+            new_option.innerHTML=available_account_type[i];
+            new_option_edit.innerHTML=available_account_type[i];
+            document.getElementById("Modal_Create_bill").getElementsByTagName("select")[0].appendChild(new_option);
+            document.getElementById("Modal_Edit_bill").getElementsByTagName("select")[0].appendChild(new_option_edit);
+        }
+        var new_option=document.createElement('option');
+        new_option.setAttribute('value','others');
+        new_option.innerHTML='others';
+        document.getElementById("Modal_Create_bill").getElementsByTagName("select")[0].appendChild(new_option);
+        document.getElementById("Modal_Edit_bill").getElementsByTagName("select")[0].appendChild(new_option);
+    </script>
+</body>
+</html>
