@@ -183,6 +183,16 @@
         .Modal_form_switch_current{
             height: 79%;background: white;border-radius: 15px;
         }
+        .mobile_notice{
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            color: black;
+            display: block;
+            text-wrap: wrap;
+        }
         #page0{
             width: 100%;height: 100%;position: absolute;background: #f3f3f3;overflow: scroll;
         }
@@ -256,6 +266,11 @@
             }
             .Groups_sticker:hover{
                 background: #222;
+            }
+        }
+        @media screen and (max-aspect-ratio: .8) {
+            .mobile_notice{
+                display: none;
             }
         }
     </style>
@@ -423,6 +438,7 @@
             </div>
         </div>
     </div>
+    <div class="mobile_notice">Please view this page on your mobile phone.</div>
     <script src="/tools/sheetjs.js"></script>
     <script>
         var now=[0];
