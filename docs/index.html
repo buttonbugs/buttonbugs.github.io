@@ -299,7 +299,10 @@
         </div>
         <div style="width: 100%;height: 2600px;"><!-- blank area --></div>
         <div id="title_cube_player_video_box" style="filter: brightness(.5);position: fixed;width: 0;">
-            <video id="title_cube_player_video" loop src="object00home/cube_player_video_1.mp4"></video>
+            <video id="title_cube_player_video" loop preload="auto">
+                <source src="object00home/cube_player_video_1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
             <img id="title_cube_player_video_button" onclick="title_cube_player_video.play();event.target.style.display='none';" style="display: block;" src="object00home/youtube.svg">
         </div>
         <div id="title_cube_player_video_relative" style="display: block;"></div>
