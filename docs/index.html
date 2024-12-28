@@ -33,7 +33,7 @@
                 overflow: hidden;
                 z-index: 100;
             }
-            .navigator>div{
+            .navigator>div,.navigator>span{
                 cursor: pointer;
             }
             #navigator_email{
@@ -61,6 +61,7 @@
                 font-size: 2.4vh;
                 transition: 2s;
                 color: #666;
+                z-index: 100;
             }
             #cube_player_cover{
                 position: fixed;
@@ -147,15 +148,6 @@
             #title_handcrafts>span.scale_120{
                 cursor: pointer;
             }
-            #title_block{
-                transition-duration: .4s;
-                position: fixed;
-                left: 6.7vh;
-                top: 9vh;
-                height: 10vh;
-                background-color: #888;
-                z-index: 100;
-            }
             #title_cube_player{
                 position: fixed;
                 left: 10vh;
@@ -226,6 +218,81 @@
             #title_cube_player_video_button:hover{
                 width: 22vh;
             }
+            #title_block{
+                transition-duration: .4s;
+                position: fixed;
+                left: 6.7vh;
+                top: 9vh;
+                height: 10vh;
+                background-color: #888;
+                z-index: 100;
+            }
+            .white_background{
+                display: inline-block;
+                margin: 0;
+                width: 100%;
+                height: 100vh;
+                background-color: white;
+            }
+            .title_block_box{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                margin-top: 9vh;
+                margin-left: 6.7vh;
+            }
+            .title_block_box>div{
+                height: 10vh;
+                width: 4vh;
+                background-color: #888;
+            }
+            .title_block_box>span{
+                margin-left: 2.85vh;
+                font-size: 10vh;
+                text-wrap: nowrap;
+            }
+            .description_box{
+                margin-left: 10vh;
+                width: 40vh;
+                z-index: 100;
+            }
+            .description_box>div{
+                margin-top: 2vh;
+                font-size: 2.5vh;
+                color: #888;
+            }
+            .description_box>div:first-child{
+                font-size: 6vh;
+                color: #444;
+                text-wrap: nowrap;
+            }
+            .description_box>div:last-child{
+                font-size: 4vh;
+                color: #666;
+                text-wrap: nowrap;
+                cursor: pointer;
+            }
+            .description_box>div:last-child:hover{
+                font-size: 4.2vh;
+                color: #000;
+                transition-duration: .2s;
+            }
+            #tip_stickers_show{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                z-index: 0;
+            }
+            #tip_stickers_show>img{
+                position: absolute;
+                transition: .5s;
+            }
+            #tip_stickers_show>div{
+                position: absolute;
+                overflow: hidden;
+                transition: .5s;
+            }
             /* icons */
             .icon_24{
                 width: 24px;
@@ -247,11 +314,12 @@
             <div class="perload_items">
                 <img src="object00home/cube_player_cover.png">
             </div>
+            <a id="download_tip_stickers" download="Tip_Stickers.exe" href="https://github.com/buttonbugs/apps/raw/refs/heads/main/object08tips.exe"></a>
         </div>
         <!-- navigator -->
         <div class="navigator">
             <img src="buttonbugs.svg" style="width: 36px;margin: 7px;">
-            <span>ButtonBugs</span>
+            <span onclick="window.scrollTo(0,0);">ButtonBugs</span>
             <div style="height: 50px;right:0;position: absolute;display: flex;flex-direction: row-reverse;align-items: center;overflow: visible;">
                 <img onclick="window.open('https://www.mymusicsheet.com/ButtonBugs');" style="margin: 7px;" src="object00home/mymusicsheet.svg" class="icon_24 scale_120" alt="MyMusicSheet" title="MyMusicSheet">
                 <img onclick="window.open('https://github.com/buttonbugs/apps');" style="margin: 7px;" src="object00home/github.svg" class="icon_24 scale_120" alt="GitHub" title="GitHub">
@@ -276,7 +344,7 @@
             <span>&nbsp;&nbsp;</span>
             <span class="scale_120" onclick="window.scrollTo(0,1);">Handcrafts</span>
             <div>&nbsp;</div>
-            <span class="scale_120">Apps</span>
+            <span class="scale_120" onclick="window.scrollTo(0,document.getElementsByClassName('white_background')[0].offsetTop);">Apps</span>
             <div>&nbsp;</div>
             <span class="scale_120">Music</span>
             <span>&nbsp;&nbsp;</span>
@@ -306,12 +374,38 @@
             <img id="title_cube_player_video_button" onclick="title_cube_player_video.play();event.target.style.display='none';" style="display: block;" src="object00home/youtube.svg">
         </div>
         <div id="title_cube_player_video_relative" style="display: block;"></div>
-        ddddddddddddddddddddddddddddddddddd<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>d<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>d<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <div class="white_background">
+            <div class="title_block_box">
+                <div></div>
+                <span>Apps</span>
+            </div>
+            <div style="position: relative;">
+                <div class="description_box" style="position: absolute;">
+                    <div>Tip Stickers</div>
+                    <div><strong>Tip Stickers</strong> is an app that can help you print label stickers on <strong>ordinary printers</strong>.</div>
+                    <div>The printed label stickers can contain the same or different <strong>text</strong>, <strong>pictures</strong>, <strong>barcodes</strong>, <strong>QR codes</strong>, etc.</div>
+                    <div onclick="document.getElementById('download_tip_stickers').click();">Download ></div>
+                </div>
+                <div id="tip_stickers_show" style="height: 200px;">
+                    <img src="object00home/tip_stickers0.png" style="left: 30vw;top: 0;width: 60vw;">
+                    <div style="left: 75vw;top: 50vh;width: 20vw;">
+                        <img src="object00home/arrow1.svg" style="width: 20vw;">
+                    </div>
+                    <div style="left: 80vw;top: 32vh;height: 10vw;">
+                        <img src="object00home/printer.svg" style="width: 10vw;">
+                    </div>
+                    <div style="left: 50vw;top: 40vh;">
+                        <img src="object00home/tip_stickers2.png" style="width: 10vw;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="width: 100%;height: 2000px;"><!-- blank area --></div>
     </body>
     <script>
         //const
         const canvas_size=[1151,647];
-        const scrolling_node=[0,500,1400,1800,2200,2300,2400,2500,2600];
+        const scrolling_node=[0,500,1400,1800,2200,2300,2400,2500,2600,2700,100,200,300];
         const scrolling_text=[//[start,end,x,y,text,color,"font-size font-family"]
             [80,680,697,70,'Robotic Arm',"rgb(48,107,188)","20px sans-serif"],
             [160,720,735,92,'180°',"rgb(48,107,188)","16px sans-serif"],
@@ -334,7 +428,13 @@
             arrow_size:12
         }
         const handcrafts_content=[
-            '<span>&nbsp;&nbsp;</span><span class="scale_120" onclick="window.scrollTo(0,1);">Handcrafts</span><div>&nbsp;</div><span class="scale_120">Apps</span><div>&nbsp;</div><span class="scale_120">Music</span><span>&nbsp;&nbsp;</span>',
+            `<span>&nbsp;&nbsp;</span>
+            <span class="scale_120" onclick="window.scrollTo(0,1);">Handcrafts</span>
+            <div>&nbsp;</div>
+            <span class="scale_120" onclick="window.scrollTo(0,document.getElementsByClassName('white_background')[0].offsetTop);">Apps</span>
+            <div>&nbsp;</div>
+            <span class="scale_120">Music</span>
+            <span>&nbsp;&nbsp;</span>`,
             '<span>&nbsp;&nbsp;</span><span>Handcrafts</span>'
         ]
         const cube_player_cover_lcd_content1='>Scramble a cube<br>';
@@ -442,6 +542,7 @@
         }, 50*(cube_player_cover_lcd_content1+cube_player_cover_lcd_content2).length+2400);
         //scroll event
         function handleScroll() {
+            const scrollApp = document.getElementsByClassName('white_background')[0].offsetTop;
             var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
             console.log(scrollTop);
             var frame = 0;
@@ -481,6 +582,12 @@
                 document.getElementById("title_cube_player_3").style.transitionDelay='0';
                 //canvas rendering
                 ctx_cube_player_cover.clearRect(0,0,canvas_size[0],canvas_size[1]);
+                //video initiate
+                document.getElementById("title_cube_player_video_box").style.filter='brightness(0)';
+                document.getElementById("title_cube_player_video_box").style.position='fixed';
+                document.getElementById("title_cube_player_video_box").style.width='0';
+                document.getElementById("title_cube_player_video_relative").style.display='block';
+                title_cube_player_video.currentTime = 0;
             }else if(scrollTop<scrolling_node[1]) {
                 document.getElementById("cube_player_cover").style.display='block';
                 document.getElementById("cube_player_cover").style.transitionDuration='.8s';
@@ -545,6 +652,12 @@
                 ctx_cube_player_cover.lineTo(468,273);
                 ctx_cube_player_cover.lineTo(465,286);
                 ctx_cube_player_cover.stroke();
+                //video initiate
+                document.getElementById("title_cube_player_video_box").style.filter='brightness(0)';
+                document.getElementById("title_cube_player_video_box").style.position='fixed';
+                document.getElementById("title_cube_player_video_box").style.width='0';
+                document.getElementById("title_cube_player_video_relative").style.display='block';
+                title_cube_player_video.currentTime = 0;
             }else if (scrollTop<scrolling_node[2]) {
                 document.getElementById("cube_player_cover").style.display='block';
                 document.getElementById("cube_player_cover").style.transitionDuration='.2s';
@@ -672,6 +785,12 @@
                 ctx_cube_player_cover.lineTo(946,206);
                 ctx_cube_player_cover.lineTo(960,222);
                 ctx_cube_player_cover.stroke();
+                //video initiate
+                document.getElementById("title_cube_player_video_box").style.filter='brightness(0)';
+                document.getElementById("title_cube_player_video_box").style.position='fixed';
+                document.getElementById("title_cube_player_video_box").style.width='0';
+                document.getElementById("title_cube_player_video_relative").style.display='block';
+                title_cube_player_video.currentTime = 0;
             }else if (scrollTop<scrolling_node[3]) {
                 document.getElementById("cube_player_cover").style.display='block';
                 document.getElementById("cube_player_cover").style.transitionDuration='.2s';
@@ -829,6 +948,12 @@
                         ctx_cube_player_cover.stroke();
                     }
                 }
+                //video initiate
+                document.getElementById("title_cube_player_video_box").style.filter='brightness(0)';
+                document.getElementById("title_cube_player_video_box").style.position='fixed';
+                document.getElementById("title_cube_player_video_box").style.width='0';
+                document.getElementById("title_cube_player_video_relative").style.display='block';
+                title_cube_player_video.currentTime = 0;
             }else if (scrollTop<scrolling_node[4]) {
                 document.getElementById("cube_player_cover").style.display='block';
                 document.getElementById("cube_player_cover").style.transitionDuration='.2s';
@@ -896,6 +1021,12 @@
                 }
                 //scrolling coil
                 scrolling_coil_render(scrollTop,scrolling_node[3],scrolling_node[4]);
+                //video initiate
+                document.getElementById("title_cube_player_video_box").style.filter='brightness(0)';
+                document.getElementById("title_cube_player_video_box").style.position='fixed';
+                document.getElementById("title_cube_player_video_box").style.width='0';
+                document.getElementById("title_cube_player_video_relative").style.display='block';
+                title_cube_player_video.currentTime = 0;
             }else if (scrollTop<scrolling_node[5]) {
                 document.getElementById("cube_player_cover").style.display='block';
                 document.getElementById("cube_player_cover").style.transitionDuration='.2s';
@@ -939,6 +1070,12 @@
                 ctx_cube_player_cover.clearRect(0,0,canvas_size[0],canvas_size[1]);
                 //scrolling coil
                 scrolling_coil_render(scrolling_node[4],scrolling_node[3],scrolling_node[4]);
+                //video initiate
+                document.getElementById("title_cube_player_video_box").style.filter='brightness(0)';
+                document.getElementById("title_cube_player_video_box").style.position='fixed';
+                document.getElementById("title_cube_player_video_box").style.width='0';
+                document.getElementById("title_cube_player_video_relative").style.display='block';
+                title_cube_player_video.currentTime = 0;
             }else if (scrollTop<scrolling_node[6]) {
                 document.getElementById("cube_player_cover").style.display='block';
                 document.getElementById("cube_player_cover").style.transitionDuration='.2s';
@@ -982,6 +1119,12 @@
                 ctx_cube_player_cover.clearRect(0,0,canvas_size[0],canvas_size[1]);
                 //scrolling coil
                 scrolling_coil_render(scrolling_node[4],scrolling_node[3],scrolling_node[4]);
+                //video initiate
+                document.getElementById("title_cube_player_video_box").style.filter='brightness(0)';
+                document.getElementById("title_cube_player_video_box").style.position='fixed';
+                document.getElementById("title_cube_player_video_box").style.width='0';
+                document.getElementById("title_cube_player_video_relative").style.display='block';
+                title_cube_player_video.currentTime = 0;
             }else if (scrollTop<scrolling_node[7]) {
                 document.getElementById("cube_player_cover").style.display='block';
                 document.getElementById("cube_player_cover").style.transitionDuration='.2s';
@@ -1054,7 +1197,7 @@
                 document.getElementById("title_handcrafts").style.height='12vh';
                 document.getElementById("title_handcrafts").style.fontSize='10vh';
                 document.getElementById("title_block").style.width='4vh';
-                document.getElementById("croll_tips").style.display='none';
+                document.getElementById("croll_tips").style.display='flex';
                 document.getElementById("title_cube_player").style.width='40vh';
                 document.getElementById("title_cube_player").style.transitionDelay='0s';
                 document.getElementById("title_cube_player_1").style.height='0vh';
@@ -1089,7 +1232,7 @@
                 }).catch(error=>{
                     document.getElementById("title_cube_player_video_button").style.display='block';
                 });
-            }else{
+            }else if (scrollTop<scrolling_node[9]) {
                 document.getElementById("cube_player_cover").style.display='none';
                 document.getElementById("cube_player_cover").style.transitionDuration='.2s';
                 document.getElementById("cube_player_cover").style.left='-8vw';
@@ -1103,7 +1246,7 @@
                 document.getElementById("title_handcrafts").style.height='12vh';
                 document.getElementById("title_handcrafts").style.fontSize='10vh';
                 document.getElementById("title_block").style.width='4vh';
-                document.getElementById("croll_tips").style.display='none';
+                document.getElementById("croll_tips").style.display='flex';
                 document.getElementById("title_cube_player").style.width='40vh';
                 document.getElementById("title_cube_player").style.transitionDelay='0s';
                 document.getElementById("title_cube_player_1").style.height='0vh';
@@ -1138,6 +1281,109 @@
                 }).catch(error=>{
                     document.getElementById("title_cube_player_video_button").style.display='block';
                 });
+            }else if (scrollTop<scrollApp+scrolling_node[10]) {
+                document.getElementById("cube_player_cover").style.display='none';
+                document.getElementById("cube_player_cover").style.transitionDuration='.2s';
+                document.getElementById("cube_player_cover").style.left='-8vw';
+                document.getElementById("cube_player_cover").style.top='19vw';
+                document.getElementById("title_creativity").style.height='0';
+                document.getElementById("title_design").style.height='0';
+                document.getElementById("title_handcrafts").innerHTML=handcrafts_content[1];
+                document.getElementById("title_handcrafts").style.left='8vh';
+                document.getElementById("title_handcrafts").style.top='8vh';
+                document.getElementById("title_handcrafts").style.width='0';
+                document.getElementById("title_handcrafts").style.height='12vh';
+                document.getElementById("title_handcrafts").style.fontSize='10vh';
+                document.getElementById("title_block").style.width='0';
+                document.getElementById("croll_tips").style.display='none';
+                document.getElementById("title_cube_player").style.width='0';
+                document.getElementById("title_cube_player").style.transitionDelay='0s';
+                document.getElementById("title_cube_player_1").style.height='0vh';
+                document.getElementById("title_cube_player_1").style.transitionDelay='0s';
+                document.getElementById("title_cube_player_2").style.width='0vh';
+                document.getElementById("title_cube_player_2").style.transitionDelay='0s';
+                document.getElementById("title_cube_player_3").style.width='0vh';
+                document.getElementById("title_cube_player_3").style.transitionDelay='0s';
+                //tip stickers show 1
+                document.getElementById("tip_stickers_show").children[0].style.left='30vw';
+                document.getElementById("tip_stickers_show").children[0].style.top='0';
+                document.getElementById("tip_stickers_show").children[0].style.width='60vw';
+                //tip stickers show 2
+                document.getElementById("tip_stickers_show").children[1].style.left='95vw';
+                document.getElementById("tip_stickers_show").children[1].style.top='50vh';
+                document.getElementById("tip_stickers_show").children[1].style.width='0vw';
+                //tip stickers show 3
+                document.getElementById("tip_stickers_show").children[2].style.left='80vw';
+                document.getElementById("tip_stickers_show").children[2].style.top='40vh';
+                document.getElementById("tip_stickers_show").children[2].style.height='0vw';
+                //video initiate
+                document.getElementById("title_cube_player_video_box").style.filter='brightness(1)';
+                document.getElementById("title_cube_player_video_box").style.position='relative';
+                document.getElementById("title_cube_player_video_box").style.width='100%';
+                document.getElementById("title_cube_player_video_relative").style.display='none';
+                title_cube_player_video.play().then(res=>{
+                    document.getElementById("title_cube_player_video_button").style.display='none';
+                }).catch(error=>{
+                    document.getElementById("title_cube_player_video_button").style.display='block';
+                });
+            }else if (scrollTop<scrollApp+scrolling_node[11]) {
+                document.getElementById("cube_player_cover").style.display='none';
+                document.getElementById("cube_player_cover").style.transitionDuration='.2s';
+                document.getElementById("cube_player_cover").style.left='-8vw';
+                document.getElementById("cube_player_cover").style.top='19vw';
+                document.getElementById("title_creativity").style.height='0';
+                document.getElementById("title_design").style.height='0';
+                document.getElementById("title_handcrafts").innerHTML=handcrafts_content[1];
+                document.getElementById("title_handcrafts").style.left='8vh';
+                document.getElementById("title_handcrafts").style.top='8vh';
+                document.getElementById("title_handcrafts").style.width='0';
+                document.getElementById("title_handcrafts").style.height='12vh';
+                document.getElementById("title_handcrafts").style.fontSize='10vh';
+                document.getElementById("title_block").style.width='0';
+                document.getElementById("croll_tips").style.display='none';
+                document.getElementById("title_cube_player").style.width='0';
+                document.getElementById("title_cube_player").style.transitionDelay='0s';
+                document.getElementById("title_cube_player_1").style.height='0vh';
+                document.getElementById("title_cube_player_1").style.transitionDelay='0s';
+                document.getElementById("title_cube_player_2").style.width='0vh';
+                document.getElementById("title_cube_player_2").style.transitionDelay='0s';
+                document.getElementById("title_cube_player_3").style.width='0vh';
+                document.getElementById("title_cube_player_3").style.transitionDelay='0s';
+                //tip stickers show 1
+                document.getElementById("tip_stickers_show").children[0].style.left='30vw';
+                document.getElementById("tip_stickers_show").children[0].style.top='20vh';
+                document.getElementById("tip_stickers_show").children[0].style.width='40vw';
+                //tip stickers show 2
+                document.getElementById("tip_stickers_show").children[1].style.left='75vw';
+                document.getElementById("tip_stickers_show").children[1].style.top='50vh';
+                document.getElementById("tip_stickers_show").children[1].style.width='20vw';
+                //tip stickers show 3
+                document.getElementById("tip_stickers_show").children[2].style.left='80vw';
+                document.getElementById("tip_stickers_show").children[2].style.top='32vh';
+                document.getElementById("tip_stickers_show").children[2].style.height='10vw';
+            }else{
+                document.getElementById("cube_player_cover").style.display='none';
+                document.getElementById("cube_player_cover").style.transitionDuration='.2s';
+                document.getElementById("cube_player_cover").style.left='-8vw';
+                document.getElementById("cube_player_cover").style.top='19vw';
+                document.getElementById("title_creativity").style.height='0';
+                document.getElementById("title_design").style.height='0';
+                document.getElementById("title_handcrafts").innerHTML=handcrafts_content[1];
+                document.getElementById("title_handcrafts").style.left='8vh';
+                document.getElementById("title_handcrafts").style.top='8vh';
+                document.getElementById("title_handcrafts").style.width='0';
+                document.getElementById("title_handcrafts").style.height='12vh';
+                document.getElementById("title_handcrafts").style.fontSize='10vh';
+                document.getElementById("title_block").style.width='0';
+                document.getElementById("croll_tips").style.display='none';
+                document.getElementById("title_cube_player").style.width='0';
+                document.getElementById("title_cube_player").style.transitionDelay='0s';
+                document.getElementById("title_cube_player_1").style.height='0vh';
+                document.getElementById("title_cube_player_1").style.transitionDelay='0s';
+                document.getElementById("title_cube_player_2").style.width='0vh';
+                document.getElementById("title_cube_player_2").style.transitionDelay='0s';
+                document.getElementById("title_cube_player_3").style.width='0vh';
+                document.getElementById("title_cube_player_3").style.transitionDelay='0s';
             }
             scrolling_text_render(scrollTop);
         }
