@@ -366,7 +366,7 @@
                     <div style="width: 50%;font-weight: unset;" onmousedown="event.target.parentElement.getElementsByTagName('div')[0].style.margin='1% -98% 0 52%';event.target.parentElement.getElementsByTagName('div')[1].style.fontWeight='unset';event.target.parentElement.getElementsByTagName('div')[2].style.fontWeight='bold';">Income</div>
                 </div>
                 <div>Amount</div>
-                <input type="number" placeholder="0.00" oninput="menber_value_oninput(event);" autofocus/>
+                <input type="number" placeholder="0.00" oninput="member_value_oninput(event);" autofocus/>
                 <div>Type</div>
                 <select onchange="var add_type=this.parentElement.getElementsByTagName('input')[1];add_type.style.display=this.value=='others'?'unset':'none';add_type.focus();"></select><br>
                 <input type="text" placeholder="Please input the custom type." style="display: none;">
@@ -399,7 +399,7 @@
                     <div style="width: 50%;font-weight: unset;" onmousedown="event.target.parentElement.getElementsByTagName('div')[0].style.margin='1% -98% 0 52%';event.target.parentElement.getElementsByTagName('div')[1].style.fontWeight='unset';event.target.parentElement.getElementsByTagName('div')[2].style.fontWeight='bold';">Income</div>
                 </div>
                 <div>Amount</div>
-                <input type="number" placeholder="0.00" oninput="menber_value_oninput(event);" autofocus/>
+                <input type="number" placeholder="0.00" oninput="member_value_oninput(event);" autofocus/>
                 <div>Type</div>
                 <select onchange="var add_type=this.parentElement.getElementsByTagName('input')[1];add_type.style.display=this.value=='others'?'unset':'none';add_type.focus();"></select><br>
                 <input type="text" placeholder="Please input the custom type." style="display: none;">
@@ -446,7 +446,7 @@
         0:recent groups
         */
         const available_account_type=['shopping','accommodation','car_charge','drinks','education','meal','medical','ticket','transportation'];
-        const available_currency_type={"USD":["$","US Dollar"],"AFN":["؋","Afghan Afghani"],"ALL":["L","Albanian Lek"],"DZD":["د.ج","Algerian Dinar"],"ARS":["$","Argentine Peso"],"AMD":["֏","Armenian Dram"],"AWG":["ƒ","Aruban Florin"],"AUD":["$","Australian Dollar"],"AZN":["₼","Azerbaijani Manat"],"BSD":["$","Bahamian Dollar"],"BHD":[".د.ب","Baharaini Dinar"],"BDT":["৳","Bangladeshi Taka"],"BBD":["$","Barbadian Dollar"],"BYN":["Br","Belarusian Ruble"],"BZD":["$","Belize Dollar"],"BMD":["$","Bermudian Dollar"],"BTN":["Nu.","Bhutanese Ngultrum"],"BTC":["","Bitcoin"],"BCH":["","Bitcoin Cash"],"VES":["Bs.","Bolívar Soberano"],"BOB":["Bs.","Bolivian Boliviano"],"BAM":["KM","Bosnian Convertible Marka"],"BWP":["P","Botswana Pula"],"BRL":["R$","Brazilian Real"],"BND":["$","Brunei Dollar"],"BGN":["лв.","Bulgarian Lev"],"BIF":["Fr","Burundian Franc"],"KHR":["៛","Cambodian Riel"],"CAD":["$","Canadian Dollar"],"CVE":["$","Cape Verdean Escudo"],"KYD":["$","Cayman Islands Dollar"],"XAF":["Fr","Central African CFA Franc"],"CLP":["$","Chilean Peso"],"CNH":["","Chinese Yuan Offshore"],"CNY":["¥","Chinese Yuan"],"COP":["$","Colombian Peso"],"KMF":["Fr","Comorian Franc"],"CDF":["Fr","Congolese Franc"],"CRC":["₡","Costa Rican Colón"],"HRK":["kn","Croatian Kuna"],"CUP":["$","Cuban Peso"],"CZK":["Kč","Czech Koruna"],"DKK":["kr","Danish Krone"],"DJF":["Fr","Djiboutian Franc"],"STN":["Db","Dobra"],"DOP":["$","Dominican Peso"],"XCD":["$","East Caribbean Dollar"],"ECS":["","Ecuador Sucre"],"EGP":["ج.م","Egyptian Pound"],"AED":["د.إ","Emirati Dirham"],"EEK":["","Estonian Kroon"],"ETH":["","Ethereum"],"ETB":["Br","Ethiopian Birr"],"EUR":["€","Euro"],"FKP":["£","Falkland Islands (Malvinas) Pound"],"FJD":["$","Fijian Dollar"],"XPF":["₣","French Pacific Franc"],"GMD":["D","Gambian Dalasi"],"GEL":["₾","Georgian Lari"],"GHS":["₵","Ghana Cedi"],"GIP":["£","Gibraltar Pound"],"XAU":["","Gold"],"GTQ":["Q","Guatemalan Quetzal"],"GNF":["Fr","Guinean Franc"],"GYD":["$","Guyana Dollar"],"HTG":["G","Haitian Gourde"],"HNL":["L","Honduran Lempira"],"HKD":["$","Hong Kong Dollar"],"HUF":["Ft","Hungarian Forint"],"ISK":["kr","Icelandic Krona"],"INR":["₹","Indian Rupee"],"IDR":["Rp","Indonesian Rupiah"],"IRR":["﷼","Iranian Rial"],"IQD":["ع.د","Iraqi Dinar"],"JMD":["$","Jamaican Dollar"],"JPY":["¥","Japanese Yen"],"JOD":["د.ا","Jordanian Dinar"],"KZT":["₸","Kazakhstani Tenge"],"KES":["Sh","Kenyan Shilling"],"KPW":["₩","Korea (North) Won"],"KWD":["د.ك","Kuwaiti Dinar"],"AOA":["Kz","Kwanza"],"KGS":["с","Kyrgyzstani Som"],"LAK":["₭","Lao Kip"],"LVL":["","Latvian Lats"],"LBP":["ل.ل","Lebanese Pound"],"LSL":["L","Lesotho Loti"],"LRD":["$","Liberian Dollar"],"LYD":["ل.د","Libyan Dinar"],"LTC":["","Litecoin"],"MOP":["P","Macanese Pataca"],"MKD":["ден","Macedonian Denar"],"MGA":["Ar","Malagasy Ariary"],"MWK":["MK","Malawian Kwacha"],"MYR":["RM","Malaysian Ringgit"],"MVR":[".ރ","Maldivian Rufiyaa"],"MRO":["","Mauritanian Ouguiya"],"MUR":["₨","Mauritian Rupee"],"MXN":["$","Mexican Peso"],"MDL":["L","Moldovan Leu"],"MNT":["₮","Mongolia Tughrik"],"MAD":["د.م.","Moroccan Dirham"],"MZN":["MT","Mozambican Metical"],"MMK":["Ks","Myanmar Kyat"],"ERN":["Nfk","Nakfa"],"NAD":["$","Namibian Dollar"],"NPR":["रू","Nepalese Rupee"],"ANG":["ƒ","Netherlands Antilles Guilder"],"ILS":["₪","New Israeli Sheqel"],"NZD":["$","New Zealand Dollar"],"NIO":["C$","Nicaraguan Córdoba"],"NGN":["₦","Nigerian Naira"],"NOK":["kr","Norwegian Krone"],"OMR":["ر.ع.","Omani Rial"],"MRU":["UM","Ouguiya"],"TOP":["T$","Pa’anga"],"PKR":["₨","Pakistan Rupee"],"XPD":["","Palladium"],"PAB":["B/.","Panamanian Balboa"],"PGK":["K","Papua New Guinean Kina"],"PYG":["₲","Paraguayan Guaraní"],"PEN":["S/.","Peruvian Nuevo Sol"],"PHP":["₱","Philippine Peso"],"XPT":["","Platinum"],"PLN":["zł","Polish Zloty"],"GBP":["£","Pound Sterling"],"QAR":["ر.ق","Qatari Rial"],"XRP":["","Ripple"],"RON":["lei","Romanian Leu"],"RUB":["₽","Russian Ruble"],"RWF":["Fr","Rwandan Franc"],"SHP":["£","Saint Helena Pound"],"SVC":["","Salvadoran Colon"],"STD":["","Sao Tomean Dobra"],"SAR":["ر.س","Saudi Riyal"],"XDR":["","SDR (Special Drawing Right)"],"RSD":["дин.","Serbian Dinar"],"SCR":["₨","Seychellois Rupee"],"SLL":["Le","Sierra Leonean Leone"],"XAG":["","Silver"],"SGD":["$","Singapore Dollar"],"SBD":["$","Solomon Islands Dollar"],"SOS":["Sh","Somali Shilling"],"TJS":["ЅМ","Somoni"],"ZAR":["R","South African Rand"],"KRW":["₩","South Korean Won"],"SSP":["£","South Sudanese Pound"],"LKR":["ரூ","Sri Lankan Rupee"],"SDG":["ج.س.","Sudanese Pound"],"SRD":["$","Suriname Dollar"],"SZL":["L","Swazi Lilangeni"],"SEK":["kr","Swedish Krona"],"CHF":["Fr.","Swiss Franc"],"SYP":["ل.س","Syrian Pound"],"TWD":["$","Taiwan Dollar"],"WST":["T","Tala"],"TZS":["Sh","Tanzanian Shilling"],"THB":["฿","Thai Baht"],"TTD":["$","Trinidad and Tobago Dollar"],"TND":["د.ت","Tunisian Dinar"],"TRY":["₺","Turkish Lira"],"TMT":["m","Turkmenistan Manat"],"UGX":["Sh","Ugandan Shilling"],"UAH":["₴","Ukrainian Hryvnia"],"CLF":["","Unidad de Fomento"],"UYU":["$","Uruguayan Peso"],"UZS":["so'm","Uzbekistani Som"],"VUV":["Vt","Vanuatu Vatu"],"VEF":["","Venezuelan Bolívar"],"VND":["₫","Vietnamese Dong"],"XOF":["Fr","West African CFA Franc"],"YER":["﷼","Yemeni Rial"],"ZMW":["ZK","Zambian Kwacha"]};//imported from https://www.bing.com/search?q=currency+calculator
+        const available_currency_type={"USD":["$","US Dollar"],"CNY":["¥","Chinese Yuan"],"AFN":["؋","Afghan Afghani"],"ALL":["L","Albanian Lek"],"DZD":["د.ج","Algerian Dinar"],"ARS":["$","Argentine Peso"],"AMD":["֏","Armenian Dram"],"AWG":["ƒ","Aruban Florin"],"AUD":["$","Australian Dollar"],"AZN":["₼","Azerbaijani Manat"],"BSD":["$","Bahamian Dollar"],"BHD":[".د.ب","Baharaini Dinar"],"BDT":["৳","Bangladeshi Taka"],"BBD":["$","Barbadian Dollar"],"BYN":["Br","Belarusian Ruble"],"BZD":["$","Belize Dollar"],"BMD":["$","Bermudian Dollar"],"BTN":["Nu.","Bhutanese Ngultrum"],"BTC":["","Bitcoin"],"BCH":["","Bitcoin Cash"],"VES":["Bs.","Bolívar Soberano"],"BOB":["Bs.","Bolivian Boliviano"],"BAM":["KM","Bosnian Convertible Marka"],"BWP":["P","Botswana Pula"],"BRL":["R$","Brazilian Real"],"BND":["$","Brunei Dollar"],"BGN":["лв.","Bulgarian Lev"],"BIF":["Fr","Burundian Franc"],"KHR":["៛","Cambodian Riel"],"CAD":["$","Canadian Dollar"],"CVE":["$","Cape Verdean Escudo"],"KYD":["$","Cayman Islands Dollar"],"XAF":["Fr","Central African CFA Franc"],"CLP":["$","Chilean Peso"],"CNH":["","Chinese Yuan Offshore"],"COP":["$","Colombian Peso"],"KMF":["Fr","Comorian Franc"],"CDF":["Fr","Congolese Franc"],"CRC":["₡","Costa Rican Colón"],"HRK":["kn","Croatian Kuna"],"CUP":["$","Cuban Peso"],"CZK":["Kč","Czech Koruna"],"DKK":["kr","Danish Krone"],"DJF":["Fr","Djiboutian Franc"],"STN":["Db","Dobra"],"DOP":["$","Dominican Peso"],"XCD":["$","East Caribbean Dollar"],"ECS":["","Ecuador Sucre"],"EGP":["ج.م","Egyptian Pound"],"AED":["د.إ","Emirati Dirham"],"EEK":["","Estonian Kroon"],"ETH":["","Ethereum"],"ETB":["Br","Ethiopian Birr"],"EUR":["€","Euro"],"FKP":["£","Falkland Islands (Malvinas) Pound"],"FJD":["$","Fijian Dollar"],"XPF":["₣","French Pacific Franc"],"GMD":["D","Gambian Dalasi"],"GEL":["₾","Georgian Lari"],"GHS":["₵","Ghana Cedi"],"GIP":["£","Gibraltar Pound"],"XAU":["","Gold"],"GTQ":["Q","Guatemalan Quetzal"],"GNF":["Fr","Guinean Franc"],"GYD":["$","Guyana Dollar"],"HTG":["G","Haitian Gourde"],"HNL":["L","Honduran Lempira"],"HKD":["$","Hong Kong Dollar"],"HUF":["Ft","Hungarian Forint"],"ISK":["kr","Icelandic Krona"],"INR":["₹","Indian Rupee"],"IDR":["Rp","Indonesian Rupiah"],"IRR":["﷼","Iranian Rial"],"IQD":["ع.د","Iraqi Dinar"],"JMD":["$","Jamaican Dollar"],"JPY":["¥","Japanese Yen"],"JOD":["د.ا","Jordanian Dinar"],"KZT":["₸","Kazakhstani Tenge"],"KES":["Sh","Kenyan Shilling"],"KPW":["₩","Korea (North) Won"],"KWD":["د.ك","Kuwaiti Dinar"],"AOA":["Kz","Kwanza"],"KGS":["с","Kyrgyzstani Som"],"LAK":["₭","Lao Kip"],"LVL":["","Latvian Lats"],"LBP":["ل.ل","Lebanese Pound"],"LSL":["L","Lesotho Loti"],"LRD":["$","Liberian Dollar"],"LYD":["ل.د","Libyan Dinar"],"LTC":["","Litecoin"],"MOP":["P","Macanese Pataca"],"MKD":["ден","Macedonian Denar"],"MGA":["Ar","Malagasy Ariary"],"MWK":["MK","Malawian Kwacha"],"MYR":["RM","Malaysian Ringgit"],"MVR":[".ރ","Maldivian Rufiyaa"],"MRO":["","Mauritanian Ouguiya"],"MUR":["₨","Mauritian Rupee"],"MXN":["$","Mexican Peso"],"MDL":["L","Moldovan Leu"],"MNT":["₮","Mongolia Tughrik"],"MAD":["د.م.","Moroccan Dirham"],"MZN":["MT","Mozambican Metical"],"MMK":["Ks","Myanmar Kyat"],"ERN":["Nfk","Nakfa"],"NAD":["$","Namibian Dollar"],"NPR":["रू","Nepalese Rupee"],"ANG":["ƒ","Netherlands Antilles Guilder"],"ILS":["₪","New Israeli Sheqel"],"NZD":["$","New Zealand Dollar"],"NIO":["C$","Nicaraguan Córdoba"],"NGN":["₦","Nigerian Naira"],"NOK":["kr","Norwegian Krone"],"OMR":["ر.ع.","Omani Rial"],"MRU":["UM","Ouguiya"],"TOP":["T$","Pa’anga"],"PKR":["₨","Pakistan Rupee"],"XPD":["","Palladium"],"PAB":["B/.","Panamanian Balboa"],"PGK":["K","Papua New Guinean Kina"],"PYG":["₲","Paraguayan Guaraní"],"PEN":["S/.","Peruvian Nuevo Sol"],"PHP":["₱","Philippine Peso"],"XPT":["","Platinum"],"PLN":["zł","Polish Zloty"],"GBP":["£","Pound Sterling"],"QAR":["ر.ق","Qatari Rial"],"XRP":["","Ripple"],"RON":["lei","Romanian Leu"],"RUB":["₽","Russian Ruble"],"RWF":["Fr","Rwandan Franc"],"SHP":["£","Saint Helena Pound"],"SVC":["","Salvadoran Colon"],"STD":["","Sao Tomean Dobra"],"SAR":["ر.س","Saudi Riyal"],"XDR":["","SDR (Special Drawing Right)"],"RSD":["дин.","Serbian Dinar"],"SCR":["₨","Seychellois Rupee"],"SLL":["Le","Sierra Leonean Leone"],"XAG":["","Silver"],"SGD":["$","Singapore Dollar"],"SBD":["$","Solomon Islands Dollar"],"SOS":["Sh","Somali Shilling"],"TJS":["ЅМ","Somoni"],"ZAR":["R","South African Rand"],"KRW":["₩","South Korean Won"],"SSP":["£","South Sudanese Pound"],"LKR":["ரூ","Sri Lankan Rupee"],"SDG":["ج.س.","Sudanese Pound"],"SRD":["$","Suriname Dollar"],"SZL":["L","Swazi Lilangeni"],"SEK":["kr","Swedish Krona"],"CHF":["Fr.","Swiss Franc"],"SYP":["ل.س","Syrian Pound"],"TWD":["$","Taiwan Dollar"],"WST":["T","Tala"],"TZS":["Sh","Tanzanian Shilling"],"THB":["฿","Thai Baht"],"TTD":["$","Trinidad and Tobago Dollar"],"TND":["د.ت","Tunisian Dinar"],"TRY":["₺","Turkish Lira"],"TMT":["m","Turkmenistan Manat"],"UGX":["Sh","Ugandan Shilling"],"UAH":["₴","Ukrainian Hryvnia"],"CLF":["","Unidad de Fomento"],"UYU":["$","Uruguayan Peso"],"UZS":["so'm","Uzbekistani Som"],"VUV":["Vt","Vanuatu Vatu"],"VEF":["","Venezuelan Bolívar"],"VND":["₫","Vietnamese Dong"],"XOF":["Fr","West African CFA Franc"],"YER":["﷼","Yemeni Rial"],"ZMW":["ZK","Zambian Kwacha"]};//imported from https://www.bing.com/search?q=currency+calculator
         var data=[/*
             ['2023.08.12_Beijing trip','CNY',-656.17,1692776354922,['AC','AH','MC'],[
                 [1692937800675,'Beijing to New York','transportation','AH',-235.12,[0.5,0.2,0.3]],
@@ -853,7 +853,7 @@
                             document.getElementById("page1").appendChild(Groups_stickers[j]);
                         }
                     }
-                    //menber
+                    //member
                     for(let j=0;j<data[i][4].length;j++){
                         //payer or payee
                         var new_option=document.createElement('option');
@@ -864,53 +864,53 @@
                         new_option_edit.innerHTML=data[i][4][j];
                         document.getElementById("Modal_Create_bill").getElementsByTagName("select")[1].appendChild(new_option);
                         document.getElementById("Modal_Edit_bill").getElementsByTagName("select")[1].appendChild(new_option_edit);
-                        //menber
-                        var menber_box=document.createElement('div');
-                        var menber_name=document.createElement('div');
-                        var menber_value=document.createElement('input');
-                        menber_box.setAttribute("class","Modal_form_input_item_box");
-                        menber_name.style='width: 28%;overflow: scroll;';
-                        menber_name.innerText=data[i][4][j];
-                        menber_value.style='width: 72%;';
-                        menber_value.value="1";
-                        menber_value.setAttribute("placeholder","0");
-                        menber_value.setAttribute("type","number");
-                        menber_value.oninput=menber_value_oninput;
-                        menber_box.appendChild(menber_name);
-                        menber_box.appendChild(menber_value);
-                        document.getElementById("Modal_Create_bill").getElementsByClassName("Modal_form_input_list")[0].appendChild(menber_box);
-                        //menber_edit
-                        var menber_box_edit=document.createElement('div');
-                        var menber_name_edit=document.createElement('div');
-                        var menber_value_edit=document.createElement('input');
-                        menber_box_edit.setAttribute("class","Modal_form_input_item_box");
-                        menber_name_edit.style='width: 28%;overflow: scroll;';
-                        menber_name_edit.innerText=data[i][4][j];
-                        menber_value_edit.style='width: 72%;';
-                        menber_value_edit.value="1";
-                        menber_value_edit.setAttribute("placeholder","0");
-                        menber_value_edit.setAttribute("type","number");
-                        menber_value_edit.oninput=menber_value_oninput;
-                        menber_box_edit.appendChild(menber_name_edit);
-                        menber_box_edit.appendChild(menber_value_edit);
-                        document.getElementById("Modal_Edit_bill").getElementsByClassName("Modal_form_input_list")[0].appendChild(menber_box_edit);
-                        //menbers in setting
-                        var setting_menber_box=document.createElement('div');
-                        var setting_menber_value=document.createElement('input');
-                        setting_menber_value.setAttribute("name",j);
-                        setting_menber_value.setAttribute("placeholder",data[i][4][j]);
-                        setting_menber_value.onblur=(event)=>{
-                            var setting_menber_value_t=event.target;
-                            if (setting_menber_value_t.value.length>0) {
+                        //member
+                        var member_box=document.createElement('div');
+                        var member_name=document.createElement('div');
+                        var member_value=document.createElement('input');
+                        member_box.setAttribute("class","Modal_form_input_item_box");
+                        member_name.style='width: 28%;overflow: scroll;';
+                        member_name.innerText=data[i][4][j];
+                        member_value.style='width: 72%;';
+                        member_value.value="1";
+                        member_value.setAttribute("placeholder","0");
+                        member_value.setAttribute("type","number");
+                        member_value.oninput=member_value_oninput;
+                        member_box.appendChild(member_name);
+                        member_box.appendChild(member_value);
+                        document.getElementById("Modal_Create_bill").getElementsByClassName("Modal_form_input_list")[0].appendChild(member_box);
+                        //member_edit
+                        var member_box_edit=document.createElement('div');
+                        var member_name_edit=document.createElement('div');
+                        var member_value_edit=document.createElement('input');
+                        member_box_edit.setAttribute("class","Modal_form_input_item_box");
+                        member_name_edit.style='width: 28%;overflow: scroll;';
+                        member_name_edit.innerText=data[i][4][j];
+                        member_value_edit.style='width: 72%;';
+                        member_value_edit.value="1";
+                        member_value_edit.setAttribute("placeholder","0");
+                        member_value_edit.setAttribute("type","number");
+                        member_value_edit.oninput=member_value_oninput;
+                        member_box_edit.appendChild(member_name_edit);
+                        member_box_edit.appendChild(member_value_edit);
+                        document.getElementById("Modal_Edit_bill").getElementsByClassName("Modal_form_input_list")[0].appendChild(member_box_edit);
+                        //members in setting
+                        var setting_member_box=document.createElement('div');
+                        var setting_member_value=document.createElement('input');
+                        setting_member_value.setAttribute("name",j);
+                        setting_member_value.setAttribute("placeholder",data[i][4][j]);
+                        setting_member_value.onblur=(event)=>{
+                            var setting_member_value_t=event.target;
+                            if (setting_member_value_t.value.length>0) {
                                 for (let k = 0; k < data.length; k++) {
                                     if (data[k][0]==now[1]) {
-                                        var setting_menber_origin=data[k][4][setting_menber_value_t.name];
+                                        var setting_member_origin=data[k][4][setting_member_value_t.name];
                                         for (let l = 0; l < data[k][5].length; l++) {
-                                            if (data[k][5][l][3]==setting_menber_origin) {
-                                                data[k][5][l][3]=setting_menber_value_t.value;
+                                            if (data[k][5][l][3]==setting_member_origin) {
+                                                data[k][5][l][3]=setting_member_value_t.value;
                                             }
                                         }
-                                        data[k][4][setting_menber_value_t.name]=setting_menber_value_t.value;
+                                        data[k][4][setting_member_value_t.name]=setting_member_value_t.value;
                                         document.getElementById("open_Recents_Groups_btn").click();
                                         document.getElementById("open_Recents_Groups_btn").click();
                                         db_setData();
@@ -919,8 +919,8 @@
                                 }
                             }
                         };
-                        setting_menber_box.appendChild(setting_menber_value);
-                        document.getElementById("Modal_More").getElementsByClassName("Modal_form_input_list")[0].appendChild(setting_menber_box);
+                        setting_member_box.appendChild(setting_member_value);
+                        document.getElementById("Modal_More").getElementsByClassName("Modal_form_input_list")[0].appendChild(setting_member_box);
                     }
                     break;
                 }
@@ -999,22 +999,22 @@
                     }
                 }
                 //new list
-                var menber_inputs=document.getElementById("Modal_Create_group").getElementsByClassName("Modal_form_input_list")[0].getElementsByTagName("input");
-                var menbers=[];
-                for (let i = 0; i < menber_inputs.length; i++) {
-                    var menber=menber_inputs[i].value;
-                    if (menber.length>0&&menbers.indexOf(menber)==-1) {
-                        menbers.push(menber);
+                var member_inputs=document.getElementById("Modal_Create_group").getElementsByClassName("Modal_form_input_list")[0].getElementsByTagName("input");
+                var members=[];
+                for (let i = 0; i < member_inputs.length; i++) {
+                    var member=member_inputs[i].value;
+                    if (member.length>0&&members.indexOf(member)==-1) {
+                        members.push(member);
                     }
                 }
-                if (menbers.length>0) {
-                    data.unshift([group_name,currency,0.0,Date.now(),menbers,[]]);
+                if (members.length>0) {
+                    data.unshift([group_name,currency,0.0,Date.now(),members,[]]);
                     close_modal("Modal_Create_group");
                     now[1]=group_name;
                     document.getElementById("open_Recents_Groups_btn").click();
                     db_setData();
                 } else {
-                    alert("There must be AT LEAST ONE menber.");
+                    alert("There must be AT LEAST ONE member.");
                 }
             } else {
                 alert("The group name should NOT be empty.");
@@ -1227,27 +1227,27 @@
                 calc_input.disabled=true;
                 calc_input.setAttribute("type","text");
             } else {
-                calc_input.oninput=menber_value_oninput;
+                calc_input.oninput=member_value_oninput;
                 calc_input.disabled=false;
                 calc_input.setAttribute("type","number");
             }
-            calc_last_menber(Modal);
+            calc_last_member(Modal);
         }
-        function menber_value_oninput(event) {
-            positive_float_input(event);
+        function member_value_oninput(event) {
+            // positive_float_input(event);         //turn input into a string: .2f, float
             var Modal=event.target.parentElement.parentElement.getElementsByTagName("input")[0].parentElement.parentElement.parentElement;
-            calc_last_menber(Modal);
+            calc_last_member(Modal);
         }
-        function calc_last_menber(Modal) {
+        function calc_last_member(Modal) {
             var Modal_Create_bill=Modal;
             if (Modal_Create_bill.getElementsByClassName("Modal_form_switch")[1].children[2].style.fontWeight=="bold") {
                 var total=Number(Modal_Create_bill.getElementsByTagName("input")[0].value);
-                var menber_inputs=Modal_Create_bill.getElementsByClassName("Modal_form_input_list")[0].getElementsByTagName("input");
+                var member_inputs=Modal_Create_bill.getElementsByClassName("Modal_form_input_list")[0].getElementsByTagName("input");
                 let i;
-                for (i = 0; i < menber_inputs.length-1; i++) {
-                    total-=Number(menber_inputs[i].value);
+                for (i = 0; i < member_inputs.length-1; i++) {
+                    total-=Number(member_inputs[i].value);
                 }
-                menber_inputs[i].value=total.toFixed(2);
+                member_inputs[i].value=total.toFixed(2);
             }
         }
         function positive_float_input(event) {
