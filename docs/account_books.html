@@ -211,6 +211,9 @@
         #page1>div:first-child{
             background: #ffffffee;
         }
+        #loading{
+            width: 100%;height: 100%;position: fixed;top: 0;left: 0;align-items: center;justify-content: center;color: gray;
+        }
         @media(prefers-color-scheme: dark){/*https://blog.csdn.net/qq_36081714/article/details/130242846*/
             html,body{
                 color: white;background: black;
@@ -438,6 +441,7 @@
             </div>
         </div>
     </div>
+    <div id="loading" style="display: flex;">Loading...</div>
     <div class="mobile_notice">Please view this page on your mobile phone.</div>
     <!-- https://docs.sheetjs.com/docs/ -->
     <script src="tools/sheetjs.js"></script>
@@ -960,6 +964,7 @@
             document.getElementById("Modal_Edit_bill").getElementsByTagName("select")[1].innerHTML="";
             now[0]=0;
             clear_list('Recents_Groups_sticker');
+            document.getElementById("loading").style.display="none";
             for(let i=0;i<data.length;i++){
                 //createElement
                 var Recents_Groups_sticker=document.createElement('div');
