@@ -583,10 +583,10 @@
             var blob = new Blob([content], {type: "text/json;charset=utf-8"});
             const objectURL = URL.createObjectURL(blob);
             document.getElementById("download_json_input").setAttribute("href",objectURL);
-            // document.getElementById("download_json_input").click();
             //https://www.cnblogs.com/chlai/p/18188159 click to share the file
             if (!navigator.canShare) {
-                return alert('Sharing denied');
+                document.getElementById("download_json_input").click();
+                return;
             }
             const file = new File([blob], 'ButtonBugs Account Books.json', { type: blob.type });
             var shareData={
@@ -594,17 +594,16 @@
                 title: 'Json',
                 text: 'Json files',
             }
-            alert(navigator.canShare(shareData))
             if (navigator.canShare(shareData)) {
                 navigator.share(shareData)
                 .then(()=>{
                     alert("then");
                 })
                 .catch ((error)=>{
-                    alert(error);
+                    document.getElementById("download_json_input").click();
                 })
             }else{
-                alert("else");
+                document.getElementById("download_json_input").click();
             }
         }
         document.getElementById("upload_excel_input").addEventListener('change',(event)=>{
