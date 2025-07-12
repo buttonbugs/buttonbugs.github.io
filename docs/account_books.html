@@ -593,10 +593,11 @@
                 title:'ButtonBugs_title',
                 files:[file]
             }
+            alert(navigator.canShare(shareData))
             if (navigator.canShare(shareData)) {
                 navigator.share(shareData)
                 .then(()=>{
-                    console.log(444)
+                    alert("then");
                 })
                 .catch ((error)=>{
                     alert(error);
