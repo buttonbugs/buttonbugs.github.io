@@ -439,7 +439,7 @@
         </div>
     </div>
     <div class="mobile_notice">Please view this page on your mobile phone.</div>
-    <script src="/tools/sheetjs.js"></script>
+    <script src="tools/sheetjs.js"></script>
     <script>
         var now=[0];
         /*
@@ -584,6 +584,24 @@
             const objectURL = URL.createObjectURL(blob);
             document.getElementById("download_json_input").setAttribute("href",objectURL);
             document.getElementById("download_json_input").click();
+            //https://www.cnblogs.com/chlai/p/18188159 click to share the file
+            if (!navigator.canShare) {
+                return alert('Sharing denied');
+            }
+            const file = new File([blob], 'ButtonBugs Account Books.json', { type: blob.type });
+            var shareData={
+                title:'ButtonBugs_title',
+                files:[file]
+            }
+            if (navigator.canShare(shareData)) {
+                navigator.share(shareData)
+                .then(()=>{
+                    console.log(444)
+                })
+                .catch ((error)=>{
+                    alert(error);
+                })
+            }
         }
         document.getElementById("upload_excel_input").addEventListener('change',(event)=>{
             const file = event.target.files[0];
