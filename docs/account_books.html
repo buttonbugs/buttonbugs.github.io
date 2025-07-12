@@ -439,6 +439,7 @@
         </div>
     </div>
     <div class="mobile_notice">Please view this page on your mobile phone.</div>
+    <!-- https://docs.sheetjs.com/docs/ -->
     <script src="tools/sheetjs.js"></script>
     <script>
         var now=[0];
@@ -1318,7 +1319,30 @@
             console.log(ws);
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, name);
-            XLSX.writeFile(wb, group_data[0].replaceAll('\/:*?"<>|','_')+".xlsx");
+            // XLSX.writeFile(wb, group_data[0].replaceAll('\/:*?"<>|','_')+".xlsx");//download XLSX file
+            //share
+            const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+            const blob  = new Blob([wbout], { type: 'application/octet-stream' });
+            if (!navigator.canShare) {
+                XLSX.writeFile(wb, group_data[0].replaceAll('\/:*?"<>|','_')+".xlsx");//download XLSX file
+                return;
+            }
+            const file = new File([blob], group_data[0].replaceAll('\/:*?"<>|','_')+".xlsx", { type: blob.type });
+            var shareData={
+                files:[file],
+                title:group_data[0].replaceAll('\/:*?"<>|','_')+".xlsx"
+            }
+            if (navigator.canShare(shareData)) {
+                navigator.share(shareData)
+                .then(()=>{
+                    console.log('Shared');
+                })
+                .catch ((error)=>{
+                    console.log(error);
+                })
+            }else{
+                XLSX.writeFile(wb, group_data[0].replaceAll('\/:*?"<>|','_')+".xlsx");//download XLSX file
+            }
         }
         //prototype
         Date.prototype.format = function (format) {
