@@ -591,13 +591,12 @@
             const file = new File([blob], 'ButtonBugs Account Books.json', { type: blob.type });
             var shareData={
                 files:[file],
-                title:'JSON file',
                 text:'ButtonBugs Account Books.json'
             }
             if (navigator.canShare(shareData)) {
                 navigator.share(shareData)
                 .then(()=>{
-                    alert("then");
+                    console.log('Shared');
                 })
                 .catch ((error)=>{
                     console.log(error);
